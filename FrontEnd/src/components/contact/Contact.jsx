@@ -96,7 +96,7 @@ const Contact = () => {
                       </ul>
                     </p>
                     <div className="email_box">
-                      <Link to="https://wa.me/+251967272727">
+                      <Link to="https://wa.me/+251967272727" target="_blank">
                         <button>
                           <span>
                             <img src={whatsapp} alt="WhatsApp" />

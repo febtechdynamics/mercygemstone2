@@ -820,7 +820,7 @@ a:focus {
   background-color: #f8bf46;
 }
 
-.info_section .info_form form {
+.info_section .info_form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -833,7 +833,7 @@ a:focus {
           align-items: center;
 }
 
-.info_section .info_form form .email_box {
+.info_section .info_form .email_box {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -843,11 +843,11 @@ a:focus {
           flex-direction: column;
 }
 
-.info_section .info_form form label {
+.info_section .info_form label {
   color: #5a5959;
 }
 
-.info_section .info_form form input {
+.info_section .info_form input {
   width: 500px;
   border: none;
   background-color: #ffffff;
@@ -855,7 +855,7 @@ a:focus {
   padding: 5px;
 }
 
-.info_section .info_form form button {
+.info_section .info_form button {
   padding: 8px 65px;
   outline: none;
   border: none;

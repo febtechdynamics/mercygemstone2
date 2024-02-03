@@ -57,18 +57,16 @@ const Footer = () => {
             </div>
             <div className="info_form">
               <div className="d-flex justify-content-center"></div>
-              <form action="">
-                <div className="email_box">
-                  <Link to="https://wa.me/+251967272727">
-                    <button>
-                      <span>
-                        <img src={whatsapp} alt="WhatsApp" />
-                      </span>
-                      Message us on WhatsApp
-                    </button>
-                  </Link>
-                </div>
-              </form>
+              <div className="email_box">
+                <Link to="https://wa.me/+251967272727" target="_blank">
+                  <button>
+                    <span>
+                      <img src={whatsapp} alt="WhatsApp" />
+                    </span>
+                    Message us on WhatsApp
+                  </button>
+                </Link>
+              </div>
             </div>
             <div className="info_social">
               <div className="d-flex justify-content-center">
@@ -83,7 +81,10 @@ const Footer = () => {
                     <FaFacebook size={25} />
                   </span>
                 </Link>
-                <Link to="#" target="_blank">
+                <Link
+                  to="https://www.instagram.com/ethiopian_opals/"
+                  target="_blank"
+                >
                   <span>
                     <FaInstagramSquare size={25} />
                   </span>
