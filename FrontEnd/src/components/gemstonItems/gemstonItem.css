@@ -1,0 +1,37 @@
+.gemstone_container {
+    width: 90%;
+    margin: auto;
+    align-gemstone: center;
+    text-align: center;
+}
+
+.single_iteme{
+    align-gemstone: center;
+    text-align: center;
+}
+.single_iteme img{
+    height: 300px;
+    width: fit-content;
+}
+.gemstone_title {
+    margin: 50px 0;
+}
+
+
+.gemstone_container .single_iteme p button{
+    background: none;
+    border-style: none;
+    padding: 5px 10px;
+    background: black;
+    color: white;
+}
+
+.gemstone_container .single_iteme p button:hover {
+    background: rgb(245, 243, 243);
+    color: rgb(0, 0, 0);
+    border: 1px solid black;
+    text-decoration: underline;
+}
+.product-image>img{
+    height: 400px;
+}

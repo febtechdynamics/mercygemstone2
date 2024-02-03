@@ -1,0 +1,38 @@
+.product-image img{
+    width: fit-content;
+    height: 400px;
+}
+
+.product-holder {
+    margin-bottom: 30px;
+}
+
+.internal-page-wrapper .product-title{
+    font-size: 40px;
+    margin: 10px 0;
+}
+
+.internal-page-wrapper .title-wraper{
+    font-size: 50px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.internal-page-wrapper .brief-description {
+    font-size: 25px;
+    font-weight: 600;
+    padding: 0 0 20px;
+}
+
+.internal-page-wrapper .product-description {
+    font-size: 20px;
+    padding: 15px;
+}
+
+.internal-page-wrapper .price {
+    font-weight: 700;
+}
+
+/* .internal-page-wrapper .product-image {
+    
+} */

@@ -1,0 +1,164 @@
+.industrial_container {
+    width: 90%;
+    margin: auto;
+    align-items: center;
+    text-align: center;
+}
+
+.industrial_title {
+    margin: 50px 0;
+}
+
+.industrial_container {
+  width: 90%;
+  margin: auto;
+  align-items: center;
+  text-align: center;
+}
+
+.industrial_title {
+  margin: 50px 0;
+}
+
+
+
+.flex-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding-bottom: 50px;
+  justify-items: center;
+}
+
+.industrial_material_image {
+  width: 400Px;
+  height: 600px;
+  /* height: auto;  */
+  justify-self: center;
+  align-self: center;
+  transition: transform 0.5s;
+}
+
+.flex-container img:hover {
+      transform: scale(1.1);
+}
+
+.industrial_material_container{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Add this to your existing industrialItem.css or create a new file if needed */
+
+.industrial_material_container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.industrial_item {
+  position: relative;
+  overflow: hidden;
+}
+
+.industrial_hover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 0, 0.5); /* Transparent yellow background */
+  text-align: center;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.industrial_item:hover .industrial_hover {
+  opacity: 1;
+}
+
+.industrial_hover p {
+  margin: 0;
+  color: #000; /* Adjust text color */
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .flex-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 40px;
+    padding-bottom: 50px;
+  }
+}
+
+
+.flex-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding-bottom: 50px;
+    justify-items: center;
+  }
+  
+  .industrial_material_image {
+    width: fit-content;
+    height: 400px;
+    /* height: auto;  */
+    justify-self: center;
+    align-self: center;
+    transition: transform 0.5s;
+  }
+
+  .flex-container img:hover {
+        transform: scale(1.1);
+  }
+
+.industrial_material_container{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Add this to your existing industrialItem.css or create a new file if needed */
+
+.industrial_material_container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .industrial_item {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .industrial_hover {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 0, 0.5); /* Transparent yellow background */
+    text-align: center;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .industrial_item:hover .industrial_hover {
+    opacity: 1;
+  }
+  
+  .industrial_hover p {
+    margin: 0;
+    color: #000; /* Adjust text color */
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .flex-container {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 40px;
+      padding-bottom: 50px;
+    }
+  }

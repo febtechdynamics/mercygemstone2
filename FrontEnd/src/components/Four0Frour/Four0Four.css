@@ -1,0 +1,30 @@
+
+.Four0Four {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 50px;
+}
+
+.Four0Four h1 {
+    font-size: 4em;
+    margin: 0;
+    color: #f7a60f;
+}
+
+.Four0Four h1 span {
+    vertical-align: middle;
+    line-height: 1;
+    font-size: 200px;
+}
+
+.F0F_img {
+    vertical-align: middle;
+    width: 100px; 
+    height: auto;
+}
+
+.Four0Four .lead {
+    font-size: 1.5em;
+    color: #666;
+    margin-top: 20px;
+}

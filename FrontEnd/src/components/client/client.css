@@ -1,0 +1,47 @@
+/* Target the carousel container */
+#carouselExampleControls {
+    overflow: hidden; /* Hide slides outside the viewport */
+  }
+  
+  /* Animate slides with a smooth transition */
+  .carousel-item {
+    transition: transform 1s ease-out;
+  }
+  
+  /* Position slides horizontally */
+  .carousel-item.active,
+  .carousel-item-next,
+  .carousel-item-prev {
+    display: flex; /* Ensure slides are treated as flex items */
+  }
+  
+  /* Move active slide to the center */
+  .carousel-item.active {
+    transform: translateX(0);
+  }
+  
+  /* Position next and previous slides off-screen */
+  .carousel-item-next {
+    transform: translateX(100%);
+  }
+  
+  .carousel-item-prev {
+    transform: translateX(-100%);
+  }
+  
+  /* Override Bootstrap's default carousel controls positioning */
+  .carousel-control-prev,
+  .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .carousel-control-prev {
+    left: 0;
+  }
+  
+  .carousel-control-next {
+    right: 0;
+  }
+  

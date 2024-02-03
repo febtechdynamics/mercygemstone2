@@ -1,0 +1,63 @@
+/* App.css */
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  display: flex;
+  /* height: 100vh; */
+}
+
+.sidebar {
+  background-color: #333;
+  color: white;
+  width: 300px;
+  padding: 20px;
+  height: 100%;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav li {
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.sidebar nav li:hover,
+.sidebar nav li.active {
+  background-color: #555;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.user-list,
+.product-list {
+  margin-top: 20px;
+}
+
+.user-list button,
+.product-list button {
+  margin: 35px 10px 20px 10px;
+  padding: 8px 20px;
+  outline: none;
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f5e47b), to(#fb930a));
+  background: linear-gradient(to bottom, #f5e47b, #fb930a);
+  text-transform: uppercase;
+}
+
+

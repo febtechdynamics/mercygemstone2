@@ -1,0 +1,20 @@
+.email_box img{
+    height: 30px;
+}
+
+.info_section {
+    z-index: 1000;
+}
+
+.social_box span {
+    text-decoration: none;
+    margin-right: 15px;
+    color: white;
+    display: inline-block;
+    transition: transform 0.5s;
+  }
+  
+  .social_box span:hover {
+    color: #fad60a;
+    transform: translateY(-5px);
+  }
