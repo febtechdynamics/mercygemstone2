@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import whatsapp from "../../../public/images/whatsapp.png"
+import React from "react";
+import { Link } from "react-router-dom";
+import whatsapp from "../../../public/images/whatsapp.png";
 
 const AboutDetail = () => {
   return (
@@ -21,8 +21,14 @@ const AboutDetail = () => {
                   <h2>About Us</h2>
                 </div>
                 <p>
-                  Mercy Gem is one of the well-known gemstone and industrial minerals exporter companies in Ethiopia.
-                  Our company is involved in gemstone cutting and processing, focusing mainly on Wello opal cutting and processing.
+                  MercyGem is a renowned exporter of gemstones and industrial
+                  minerals in Ethiopia, specializing in the cutting and
+                  processing of Wello opals. With precision and expertise, we
+                  bring out the captivating beauty of these opals, ensuring they
+                  shine with unparalleled brilliance. Our commitment to quality
+                  and ethical practices distinguishes us as leaders in the
+                  industry, delivering exquisite gems to our discerning client
+                  worldwide.
                 </p>
               </div>
             </div>
@@ -47,19 +53,26 @@ const AboutDetail = () => {
         <div className="container">
           <div className="row">
             {/* Mission Detail Box */}
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="detail-box">
                 <div className="heading_container">
                   <h2>Mission</h2>
                 </div>
                 <p>
-                  Our mission is to provide high-quality gemstones and industrial minerals to our customers, contributing to their success and satisfaction.
+                  Our mission at Mercy Gem is centered around the provision of
+                  superior quality gemstones and industrial minerals to our
+                  esteemed customers. We are committed to ensuring their success
+                  and satisfaction by offering products of exceptional value and
+                  beauty. With a focus on precision and excellence, we strive to
+                  exceed expectations in every facet of our operations. Our
+                  dedication to craftsmanship and ethical practices underscores
+                  our commitment to delivering excellence, enriching the lives
+                  of our customers worldwide.
                 </p>
               </div>
             </div>
             <div className="col-md-6">
-              <div className="img-box">
-              </div>
+              <div className="img-box"></div>
             </div>
           </div>
         </div>
@@ -71,19 +84,24 @@ const AboutDetail = () => {
 
         <div className="container">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="detail-box">
                 <div className="heading_container">
                   <h2>Vision</h2>
                 </div>
                 <p>
-                  Our vision is to be a leading exporter in the gemstone and industrial minerals industry, recognized for our integrity, innovation, and customer-centric approach.
+                  Our aspiration at Mercy Gem is to establish ourselves as a
+                  foremost leader in the exportation of gemstones and industrial
+                  minerals. We strive to be distinguished for our commitment to
+                  integrity, continuous innovation, and a customer-centric
+                  ethos. Through our relentless pursuit of excellence, we aim to
+                  set new standards within the industry, earning the trust and
+                  admiration of our global clientele.
                 </p>
               </div>
             </div>
             <div className="col-md-6">
-              <div className="img-box">
-              </div>
+              <div className="img-box"></div>
             </div>
           </div>
         </div>

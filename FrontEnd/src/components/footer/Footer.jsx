@@ -42,7 +42,7 @@ const Footer = () => {
                 <div className="info_contact">
                   <Link to="/">
                     <img src={phoneIcon} alt="Phone" />
-                    <span>+01 1234567890</span>
+                    <span>+251967272727</span>
                   </Link>
                 </div>
               </div>
@@ -50,7 +50,7 @@ const Footer = () => {
                 <div className="info_contact">
                   <Link to="/">
                     <img src={mailIcon} alt="Email" />
-                    <span>demo@gmail.com</span>
+                    <span>mercygems109@gmail.com</span>
                   </Link>
                 </div>
               </div>
