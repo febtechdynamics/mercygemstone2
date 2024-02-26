@@ -1,18 +1,18 @@
 
 POST http://localhost:3000/api/user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWNmNGUxNTk0YTdmZjJjMWQ3NGVkZiIsImlhdCI6MTcwMjQ2MTc5NywiZXhwIjoxNzAyNTQ4MTk3fQ.SItCozXj40hQy67vytrr70smzr-0qCa3uVOm6wNUhKM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YWVhYjI5MzFkOTMzMzU1MWVlMGE0NiIsImlhdCI6MTcwNjA5Mzg5OCwiZXhwIjoxNzA2NTI1ODk4fQ.kgkNNkuwToBbSaWwhGwdOfRuo1rDb6PNMPTC6C2idQY
 
 {
-    "firstName":"nati",
-    "lastName":"Abera",
-    "phoneNumber":"0912211221",
-    "email":"email115@gmail.com",
-    "password":"12345678"
+    "firstName":"Fasika",
+    "lastName":"Argaw",
+    "phoneNumber":"0967272727",
+    "email":"mercygems109@gmail.com",
+    "password":"mercygems123"
 }
 ###
 
-GET http://localhost:3000/api/user?perPage=4&page=3
+GET http://localhost:3000/api/user?perPage=4&page=1
 Content-Type: application/json
 
 ###
@@ -42,8 +42,8 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-    "email":"email5@gmail.com",
-    "password":"12345678"
+    "email":"mercygems109@gmail.com",
+    "password":"mercygems123"
 }
 ###
 

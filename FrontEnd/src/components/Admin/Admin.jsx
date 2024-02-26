@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function Admin() {
   const [activeTab, setActiveTab] = useState(null);
+  const [products, setProducts] = useState([]); // Assuming products are stored in state
 
   const navigate = useNavigate();
 
@@ -29,14 +30,16 @@ function Admin() {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.delete(
+      await axios.delete(
         `http://localhost:3000/api/product/${productId}`,
         config
       );
-      window.location.reload();
-      toast.success(response.data.message);
+
+      // Update state to remove the deleted product
+      setProducts(products.filter((product) => product.id !== productId));
+
+      toast.success("Product deleted successfully");
     } catch (error) {
-      window.location.reload();
       toast.error(error.response?.data?.message || "An error occurred");
     }
   };

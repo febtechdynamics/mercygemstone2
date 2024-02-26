@@ -55,7 +55,9 @@ function GemstoneList() {
                     <div className="product-description">
                       {productDescription}
                     </div>
-                    <div className="price">{`Price: $ ${productPrice}`}</div>
+                    <div className="price">
+                      {productPrice ? `Price: $ ${productPrice}` : ""}
+                    </div>
                   </div>
 
                   <div
