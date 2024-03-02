@@ -1,5 +1,6 @@
 const express = require("express");
 const connectDB = require("./config/database");
+const path = require("path");
 const ErrorHandler = require("./middleware/error");
 const helmet = require("helmet");
 const user = require("./routes/user.routes");
