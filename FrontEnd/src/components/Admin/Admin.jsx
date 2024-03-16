@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 function Admin() {
   const [activeTab, setActiveTab] = useState(null);
   const [products, setProducts] = useState([]); // Assuming products are stored in state
+  const [showSideBar, setShowSideBar] = useState(true);
 
   const navigate = useNavigate();
 
@@ -61,9 +62,14 @@ function Admin() {
 
   return (
     <div className="app">
-      <Sidebar activeTab={activeTab} handleTabClick={handleTabClick} />
+      {showSideBar && (
+        <Sidebar activeTab={activeTab} handleTabClick={handleTabClick} />
+      )}
+
       <MainContent
         activeTab={activeTab}
+        setShowSideBar={setShowSideBar}
+        showSideBar={showSideBar}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
         handleAddUser={handleAddUser}
