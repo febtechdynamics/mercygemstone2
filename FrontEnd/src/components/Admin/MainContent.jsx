@@ -10,6 +10,11 @@ function MainContent({
 }) {
   return (
     <div className="main-content">
+      {activeTab == null && (
+        <div>
+          <h3>Welcome to Admin Dashboard</h3>
+        </div>
+      )}
       {activeTab === "users" && (
         <UserList
           handleEdit={handleEdit}

@@ -20,7 +20,7 @@ function Sidebar({ activeTab, handleTabClick }) {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: "1rem",
-        zIndex: "1000",
+        zIndex: "100",
       }}
     >
       <nav>
