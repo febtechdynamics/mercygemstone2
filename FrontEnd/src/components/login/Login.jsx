@@ -7,6 +7,8 @@ import axios from "axios";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   let navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,21 +23,27 @@ function Login() {
       email,
       password,
     };
+    if (!email || !password) {
+      return toast.error("Please fill all fields");
+    }
 
     try {
+      setIsLoading(true);
       const response = await axios.post(
-        "http://localhost:3000/api/user/login",
+        `${import.meta.env.VITE_REACT_APP_base_url}/api/user/login`,
         userData,
         config
       );
       console.log("Login Response:", response.data); // Log response data
       const token = response.data.token;
-      toast.success(response.data.message);
-      localStorage.setItem("token", token); // Set token in local storage
+      localStorage.setItem("token", token);
+      setIsLoading(false); // Set token in local storage
       navigate("/admin");
+      toast.success(response.data.message);
     } catch (error) {
       console.error("Login Error:", error);
       toast.error(error.response?.data?.message || "An error occurred");
+      setIsLoading(false);
     }
   };
 
@@ -61,7 +69,20 @@ function Login() {
             onChange={(e) => setPassword(e.target.value.trim())}
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className="w-25" disabled={isLoading}>
+          {isLoading ? (
+            <div className="w-100 d-flex gap-3 justify-content-between align-items-center">
+              <span
+                class="ms-3 spinner-border spinner-border-sm"
+                role="status"
+              ></span>
+
+              <div>Sign...</div>
+            </div>
+          ) : (
+            <div>Sign In</div>
+          )}
+        </button>
       </form>
     </div>
   );

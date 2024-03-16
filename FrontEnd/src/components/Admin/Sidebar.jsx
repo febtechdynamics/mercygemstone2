@@ -9,7 +9,20 @@ function Sidebar({ activeTab, handleTabClick }) {
   };
 
   return (
-    <div className="sidebar">
+    <div
+      className="sidebar"
+      style={{
+        position: "sticky",
+        top: "105px",
+        left: "0",
+        height: "85vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: "1rem",
+        zIndex: "1000",
+      }}
+    >
       <nav>
         <ul>
           <li
