@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Admin.css"; // Import your custom CSS file
 import Sidebar from "./Sidebar";
 import axios from "axios";
@@ -12,6 +12,15 @@ function Admin() {
 
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("token");
+
+  // Redirect to login page if users token is not present
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token, navigate]);
+
   const handleTabClick = (tab) => {
     console.log(`clicked ${tab}`);
     setActiveTab(tab);
@@ -23,8 +32,6 @@ function Admin() {
 
   const handleDelete = async (productId) => {
     try {
-      const token = localStorage.getItem("token");
-
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
