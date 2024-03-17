@@ -14,13 +14,21 @@ import {
   TableHead,
   TableRow,
   Paper,
+  IconButton,
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import Swal from "sweetalert2";
+import DeleteBtn from "./DeleteBtn";
 
 function UserList({ handleDelete }) {
   const [users, setUsers] = useState([]);
-  const [userId, setUserId] = useState(null);
+  const [mode, setMode] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // State to control the visibility of the modal
+  const [submitting, setSubmitting] = useState(false);
+
+  const [currentUser, setCurrentUser] = useState({});
 
   let token = localStorage.getItem("token");
 
@@ -46,44 +54,109 @@ function UserList({ handleDelete }) {
       });
   };
 
+  const editHandler = (user) => {
+    setCurrentUser(user);
+    setMode("edit");
+    setShowModal(true);
+  };
+
+  const deleteHandler = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setSubmitting(true);
+        axios
+          .delete(
+            ` ${import.meta.env.VITE_REACT_APP_base_url}/api/user/${id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res.data);
+            setSubmitting(false);
+            Swal.fire({
+              title: "Deleted!",
+              text: "The User has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            setSubmitting(false);
+            Swal.fire({
+              title: "Error!",
+              text: "The User has not been deleted.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
+
   const columns = [
     { field: "_id", headerName: "ID" },
     { field: "firstName", headerName: "FirstName" },
     { field: "lastName", headerName: "LastName" },
-    { field: "email", headerName: "Email" },
-    { field: "phoneNumber", headerName: "Phone Number" },
+    { field: "email", headerName: "Email", width: 200 },
+    { field: "phoneNumber", headerName: "Phone Number", width: 150 },
     { field: "role", headerName: "User Role" },
     {
       field: "actions",
-      headerName: "User Role",
+      headerName: "Actions",
+      width: 150,
       renderCell: (params) => {
+        // console.log(params);
         return (
-          <div className="d-flex gap-4">
-            <span className="warning p-1">
-              <MdEdit color="green" size={20} />
+          <div className="d-flex gap-5">
+            <span
+              onClick={() => editHandler(params?.row)}
+              className="warning p-1"
+            >
+              <IconButton aria-label="delete">
+                <EditIcon color="success" />
+              </IconButton>
+              {/* <MdEdit color="green" size={20} /> */}
             </span>
-            <span className="danger p-1">
-              <MdDelete color="red" size={20} />
-            </span>
+            <DeleteBtn
+              route={`${import.meta.env.VITE_REACT_APP_base_url}/api/user`}
+              id={params?.row?._id}
+              setSubmitting={setSubmitting}
+              token={token}
+            />
+            {/* <span
+              onClick={() => deleteHandler(params?.row?._id)}
+              className="danger p-1"
+            >
+              <IconButton aria-label="delete">
+                <DeleteIcon color="error" />
+              </IconButton>
+          
+            </span> */}
           </div>
         );
       },
     },
   ];
 
-  const rows = [
-    { id: 1, col1: "Hello", col2: "World" },
-    { id: 2, col1: "DataGridPro", col2: "is Awesome" },
-    { id: 3, col1: "MUI", col2: "is Amazing" },
-  ];
-
   useEffect(() => {
     // Fetch users from API or database
     fetchUsers();
-  }, []);
+  }, [submitting]);
 
   const openModal = () => {
     setShowModal(true);
+    setMode("add");
+    setCurrentUser({});
   };
 
   const closeModal = () => {
@@ -92,152 +165,65 @@ function UserList({ handleDelete }) {
 
   return (
     <div className="user-list">
-      <button onClick={openModal}>Add New User</button>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>FirstName</TableCell>
-              <TableCell>LastName</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Phone Number</TableCell>
-              <TableCell>Role</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {isLoading ? (
-              <div
-                class="spinner-border mx-auto mt-5"
-                style={{
-                  width: "3rem",
-                  height: "3rem",
-                }}
-                role="status"
-              ></div>
-            ) : (
-              users.map(
-                ({ _id, firstName, lastName, email, phoneNumber, role }) => (
-                  <TableRow key={_id}>
-                    <TableCell>{firstName}</TableCell>
-                    <TableCell>{lastName}</TableCell>
-                    <TableCell>{email}</TableCell>
-                    <TableCell>{phoneNumber}</TableCell>
-                    <TableCell>{role}</TableCell>
-                    <TableCell>
-                      {
-                        <div className="d-flex gap-4">
-                          <span className="warning p-1">
-                            <MdEdit color="green" size={20} />
-                          </span>
+      <div className="d-flex justify-content-between">
+        <button className="custom-btn" onClick={openModal}>
+          Add New User
+        </button>
+        {/* search */}
+        <div className="d-flex align-items-center">
+          <div className="">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="form-control"
+              id="search"
+              name="search"
+            />
+          </div>
+          <div className="">
+            <button type="submit" className="btn btn-base btn-color">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="feather feather-search"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
 
-                          <span className="danger p-1">
-                            <MdDelete color="red" size={20} />
-                          </span>
-                        </div>
-                      }
-                    </TableCell>
-                  </TableRow>
-                  // <tr key={_id}>
-                  //   <td className="text-wrap">{firstName}</td>
-                  //   <td className="text-wrap">{lastName}</td>
-                  //   <td className="text-wrap">{email}</td>
-                  //   <td className="text-wrap">{phoneNumber}</td>
-                  //   <td className="text-wrap">{role}</td>
-                  //   <td>
-                  //     <div className="d-flex gap-4">
-                  //       <span className="warning p-1">
-                  //         <MdEdit color="green" size={20} />
-                  //       </span>
-                  //       <span className="danger p-1">
-                  //         <MdDelete color="red" size={20} />
-                  //       </span>
-                  //     </div>
-                  //   </td>
-                  // </tr>
-                )
-              )
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      {/* <div style={{ height: 300, width: "100%" }}>
+      <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           getRowId={(param) => param._id}
           rows={users}
           loading={isLoading}
+          sx={{ width: "100%" }}
           pagination={false}
           disableColumnMenu={true}
           disableColumnFilter={true}
           di
           columns={columns}
         />
-      </div> */}
-      {/* <div className="table-responsive-sm">
-        <table class="table table-hover table-sm">
-          <thead class="thead-light">
-            <tr>
-              <th className="text-wrap" scope="col">
-                First Name
-              </th>
-              <th className="text-wrap" scope="col">
-                Last Name
-              </th>
-              <th className="text-wrap" scope="col">
-                Email
-              </th>
-              <th className="text-wrap" scope="col">
-                Phone Number
-              </th>
-              <th className="text-wrap" scope="col">
-                User Role
-              </th>
-              <th className="text-wrap" scope="col">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {isLoading ? (
-              <div
-                class="spinner-border mx-auto mt-5"
-                style={{
-                  width: "3rem",
-                  height: "3rem",
-                }}
-                role="status"
-              ></div>
-            ) : (
-              users.map(
-                ({ _id, firstName, lastName, email, phoneNumber, role }) => (
-                  <tr key={_id}>
-                    <td className="text-wrap">{firstName}</td>
-                    <td className="text-wrap">{lastName}</td>
-                    <td className="text-wrap">{email}</td>
-                    <td className="text-wrap">{phoneNumber}</td>
-                    <td className="text-wrap">{role}</td>
-                    <td>
-                      <div className="d-flex gap-4">
-                        <span className="warning p-1">
-                          <MdEdit color="green" size={20} />
-                        </span>
-                        <span className="danger p-1">
-                          <MdDelete color="red" size={20} />
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                )
-              )
-            )}
-          </tbody>
-        </table>
-      </div> */}
-      {/*  */}
+      </div>
 
       {showModal && (
         <Modal onClose={closeModal}>
-          <AddUser />
+          <AddUser
+            submitting={submitting}
+            setSubmitting={setSubmitting}
+            currentUser={currentUser}
+            mode={mode}
+          />
         </Modal>
       )}
     </div>

@@ -122,14 +122,20 @@ exports.getProductById = catchAsync(async (req, res, next) => {
 
 exports.updateProduct = catchAsync(async (req, res, next) => {
   try {
-    let product = await Product.findById(req.params.id);
-    if (!product) {
-      return next(new ErrorHandler("Product not found", 404));
-    }
-    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    // let product = await Product.findById(req.params.id);
+    // if (!product) {
+    //   return next(new ErrorHandler("Product not found", 404));
+    // }
+    // console.log(req.body);
+    // console.log(req.params);
+    await Product.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
       useFindAndModify: false,
+    });
+    return res.status(200).json({
+      success: true,
+      message: "Product updated successfully",
     });
   } catch (error) {
     return new ErrorHandler(error.message, 500);
