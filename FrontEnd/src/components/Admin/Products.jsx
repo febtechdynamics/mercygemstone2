@@ -1,44 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "./products.css"; // Import your custom CSS file
 
-function Products({ id }) {
+function Products() {
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productImage, setProductImage] = useState(null);
   const [productCategory, setProductCategory] = useState("GemStone");
-  const [editedImage, setEditedImage] = useState(null); // State for edited image
-
-  // Fetch product data when component mounts if id prop is provided
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/api/product/${id}`
-        );
-        const productData = response.data; // Assuming the response contains product data
-        setProductName(productData.productName);
-        setProductPrice(productData.productPrice);
-        setProductDescription(productData.productDescription);
-        setProductCategory(productData.productCategory);
-        // You might need to handle product image separately
-      } catch (error) {
-        console.error(error);
-        toast.error(error?.response?.data?.message || "An error occurred");
-      }
-    };
-
-    if (id) {
-      fetchData();
-    }
-  }, [id]);
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     console.log(file);
-    setEditedImage(file); // Set edited image when file input changes
+    setProductImage(file);
   };
 
   const handleSubmit = async (e) => {
@@ -48,8 +23,8 @@ function Products({ id }) {
     productData.append("productName", productName);
     productData.append("productPrice", productPrice);
     productData.append("productDescription", productDescription);
+    productData.append("file", productImage);
     productData.append("productCategory", productCategory);
-    productData.append("file", editedImage || productImage); // Use editedImage if available, otherwise use productImage
 
     try {
       const token = localStorage.getItem("token");
@@ -59,28 +34,32 @@ function Products({ id }) {
           Authorization: `Bearer ${token}`,
         },
       };
-
-      let response;
-      if (id) {
-        response = await axios.put(
-          `http://localhost:3000/api/product/${id}`,
-          productData,
-          config
-        );
-        console.log(`edit file ${id} ${response.data}`);
+      if (
+        productName === "" ||
+        productDescription === "" ||
+        productImage === null
+      ) {
+        toast.error("Please fill out the form");
       } else {
-        response = await axios.post(
+        const response = await axios.post(
           "http://localhost:3000/api/product",
           productData,
           config
         );
-      }
 
-      console.log(response.data);
-      toast.success(response.data.message);
+        console.log(response.data);
+        toast.success(response.data.message);
+
+        // Reset form fields after successful submission
+        setProductName("");
+        setProductPrice("");
+        setProductDescription("");
+        setProductCategory("GemStone");
+        setProductImage(null); // Reset to null or an empty string
+      }
     } catch (error) {
       console.error(error);
-      toast.error(error?.response?.data?.message || "An error occurred");
+      toast.error(error?.response.data.message || "An error occurred");
     }
   };
 
@@ -145,7 +124,7 @@ function Products({ id }) {
       </div>
 
       <button type="submit" className="btn btn-primary">
-        {id ? "Edit Product" : "Add Product"}
+        Add Product
       </button>
     </form>
   );
