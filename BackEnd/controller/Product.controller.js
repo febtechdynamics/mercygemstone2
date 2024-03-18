@@ -122,17 +122,69 @@ exports.getProductById = catchAsync(async (req, res, next) => {
 
 exports.updateProduct = catchAsync(async (req, res, next) => {
   try {
-    let product = await Product.findById(req.params.id);
+    const productId = req.params.productId;
+    const { productName, productPrice, productDescription, productCategory } =
+      req.body;
+
+    // Check if required fields are provided
+    if (!productName || !productDescription || !productCategory) {
+      return next(new ErrorHandler("Please enter all fields", 400));
+    }
+
+    // Check if the product exists
+    let product = await Product.findById(productId);
     if (!product) {
       return next(new ErrorHandler("Product not found", 404));
     }
-    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-      useFindAndModify: false,
+
+    // Update product details
+    product.productName = productName;
+    product.productPrice = productPrice;
+    product.productDescription = productDescription;
+    product.productCategory = productCategory;
+
+    // Handle product images
+    if (req.files && req.files.length > 0) {
+      const uploader = async (path) => await uploads(path, "Images");
+      const urls = [];
+
+      for (const file of req.files) {
+        const { path } = file;
+        try {
+          const newpath = await uploader(path);
+          urls.push(newpath);
+          fs.unlinkSync(path);
+        } catch (error) {
+          console.error("Error uploading to Cloudinary:", error);
+          return next(
+            new ErrorHandler("Error uploading image to Cloudinary", 500)
+          );
+        }
+      }
+
+      // Delete existing images associated with the product
+      product.productImage.forEach((image) => {
+        deleteImage(image.public_id);
+      });
+
+      // Update product images
+      product.productImage = urls.map((urlInfo) => ({
+        urls: urlInfo.url,
+        public_id: urlInfo.id,
+      }));
+    }
+
+    // Save updated product
+    await product.save();
+
+    // Send response to the client
+    res.status(200).json({
+      success: true,
+      message: "Product updated successfully",
+      product,
     });
   } catch (error) {
-    return new ErrorHandler(error.message, 500);
+    return next(new ErrorHandler(error.message, 500));
   }
 });
 
