@@ -7,20 +7,22 @@ import { IconButton, Pagination } from "@mui/material";
 import DeleteBtn from "./DeleteBtn";
 import EditIcon from "@mui/icons-material/Edit";
 import moment from "moment";
+import SingleCarousel from "../SingleCarosel/SingleCarosel";
 
 function ProductList({ handleEdit, handleDelete }) {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  // const [totalPages, setTotalPages] = useState(1);
   const [showModal, setShowModal] = useState(false);
-  const [showEditModal, setShowdEditModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState("");
 
   const [currentProduct, setCurrentProduct] = useState({}); // State to store the current product to be edited
   const [mode, setMode] = useState(null);
 
   // State to control the visibility of the modal
+
+  let token = localStorage.getItem("token");
 
   const getProducts = async () => {
     try {
@@ -28,10 +30,9 @@ function ProductList({ handleEdit, handleDelete }) {
       const response = await axios.get(
         `${
           import.meta.env.VITE_REACT_APP_base_url
-        }/api/product?perPage=5&page=${currentPage}`
+        }/api/product?perPage=6&page=${currentPage}&search=${search}`
       );
-      console.log(response.data);
-      setProducts(response.data.products);
+      setProducts(response.data);
       setIsLoading(false);
     } catch (error) {
       console.error("Get Products Error:", error);
@@ -41,13 +42,12 @@ function ProductList({ handleEdit, handleDelete }) {
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
-    console.log(value);
   };
 
   useEffect(() => {
     // Fetch products from API or database
     getProducts();
-  }, [currentPage, submitting]);
+  }, [currentPage, submitting, search]);
 
   const openModal = () => {
     setShowModal(true);
@@ -62,13 +62,6 @@ function ProductList({ handleEdit, handleDelete }) {
     setCurrentProduct(data);
     setMode("edit");
     setShowModal(true);
-    // handleEdit(_id);
-    // setProductId(_id);
-    // setShowdEditModal(true);
-  };
-
-  const closeEditModal = () => {
-    setShowdEditModal(false);
   };
 
   return (
@@ -97,6 +90,8 @@ function ProductList({ handleEdit, handleDelete }) {
                     className="form-control"
                     id="search"
                     name="search"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
                   />
                 </div>
                 <div className="">
@@ -138,8 +133,8 @@ function ProductList({ handleEdit, handleDelete }) {
           ) : (
             <>
               <section className="row">
-                {products?.length > 0 &&
-                  products?.map(
+                {products?.products?.length > 0 &&
+                  products?.products?.map(
                     (
                       {
                         _id,
@@ -156,19 +151,21 @@ function ProductList({ handleEdit, handleDelete }) {
                         <div className="col-md-4 mt-5 col-sm-12">
                           <div
                             className="card shadow-sm border-0 rounded"
-                            style={{ maxHeight: "auto" }}
+                            style={{ height: "470px" }}
                           >
                             <div className="card-body p-0">
                               {productImage && (
-                                <img
-                                  src={productImage[0]?.urls}
-                                  alt=""
-                                  className="w-100 card-img-top "
-                                  style={{
-                                    maxHeight: "200px",
-                                    objectFit: "cover",
-                                  }}
-                                />
+                                <div
+                                // src={productImage[0]?.urls}
+                                // alt=""
+                                // className="w-100 card-img-top "
+                                // style={{
+                                //   maxHeight: "200px",
+                                //   objectFit: "cover",
+                                // }}
+                                >
+                                  <SingleCarousel images={productImage} />
+                                </div>
                               )}
                               <div className="p-4 d-flex flex-column justify-content-between">
                                 <div>
@@ -206,23 +203,17 @@ function ProductList({ handleEdit, handleDelete }) {
                                       <IconButton aria-label="delete">
                                         <EditIcon color="success" />
                                       </IconButton>
-                                      {/* <MdEdit />
-                                      <span className="ml-1 d-sm-hidden">
-                                        Edit
-                                      </span> */}
                                     </div>
                                   </li>
                                   <li className="list-inline-item m-0">
-                                    <DeleteBtn />
-                                    {/* <div
-                                      className="btn bg-danger"
-                                      onClick={() => handleDelete(_id)}
-                                    >
-                                      <MdDelete />
-                                      <span className="ml-1 d-sm-hidden">
-                                        Delete
-                                      </span>
-                                    </div> */}
+                                    <DeleteBtn
+                                      setSubmitting={setSubmitting}
+                                      token={token}
+                                      id={_id}
+                                      route={`${
+                                        import.meta.env.VITE_REACT_APP_base_url
+                                      }/api/product`}
+                                    />
                                   </li>
                                 </ul>
                               </div>
@@ -239,18 +230,9 @@ function ProductList({ handleEdit, handleDelete }) {
                   page={currentPage}
                   variant="outlined"
                   shape="rounded"
-                  count={Math.ceil(products?.length / 5)}
+                  count={Math.ceil(products?.totalItems / 6)}
                 />
               </div>
-              {/* <div className="pagination">
-                <button onClick={handlePrevPage}>{"<"}</button>
-                {Array.from({ length: 10 }, (_, i) => i + 1).map((page) => (
-                  <button key={page} onClick={() => handlePageChange(page)}>
-                    {page}
-                  </button>
-                ))}
-                <button onClick={handleNextPage}>{">"}</button>
-              </div> */}
             </>
           )}
         </div>
@@ -267,12 +249,6 @@ function ProductList({ handleEdit, handleDelete }) {
           />
         </Modal>
       )}
-      {/* {showEditModal && (
-        <Modal onClose={closeEditModal}>
-        
-          <Products id={productId} />
-        </Modal>
-      )} */}
     </div>
   );
 }

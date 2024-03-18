@@ -137,3 +137,10 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
     return next(new ErrorHandler(error.message, 500));
   }
 });
+
+exports.getMe = catchAsync(async (req, res, next) => {
+  res.status(200).json({
+    status: true,
+    me: req.user,
+  });
+});

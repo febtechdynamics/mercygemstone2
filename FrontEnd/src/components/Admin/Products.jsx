@@ -33,9 +33,12 @@ function Products({
   const token = localStorage.getItem("token");
 
   const onSubmit = async (submittedData) => {
+    console.log(submittedData);
     let formData = new FormData();
     if (submittedData.productImage?.length > 0) {
-      formData.append("file", submittedData.productImage[0]);
+      for (let i = 0; i < submittedData.productImage?.length; i++) {
+        formData.append("file", submittedData.productImage[i]);
+      }
     }
     submittedData.productImage &&
       formData.append("productName", submittedData.productName);
@@ -46,7 +49,7 @@ function Products({
     submittedData.productPrice &&
       formData.append("productPrice", submittedData.productPrice);
 
-    // console.log(formData.get("productName"));
+    console.log(formData.get("file"));
     let config = {
       headers: {
         // "Content-Type": "multipart/form-data",
@@ -84,29 +87,6 @@ function Products({
     }
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `http://localhost:3000/api/product/${id}`
-  //       );
-  //       const productData = response.data; // Assuming the response contains product data
-  //       setProductName(productData.productName);
-  //       setProductPrice(productData.productPrice);
-  //       setProductDescription(productData.productDescription);
-  //       setProductCategory(productData.productCategory);
-  //       // You might need to handle product image separately
-  //     } catch (error) {
-  //       console.error(error);
-  //       toast.error(error?.response?.data?.message || "An error occurred");
-  //     }
-  //   };
-
-  //   if (id) {
-  //     fetchData();
-  //   }
-  // }, []);
-  // console.log(errors);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-50 mx-auto p-3">
       <div className="form-group">
@@ -205,6 +185,7 @@ function Products({
             id="file-input"
             accept=".jpg,.jpeg,.png"
             // onChange={handleFileInputChange}
+            multiple={true}
             {...register("productImage", {
               required: currentProduct?.productImage
                 ? false

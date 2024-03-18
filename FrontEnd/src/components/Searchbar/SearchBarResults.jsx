@@ -3,6 +3,7 @@ import "./searchBar.css";
 import { Link } from "react-router-dom";
 
 const SearchBarResults = ({ results }) => {
+  console.log(results);
   const resultsClassName =
     results.length > 0
       ? "search_results"
@@ -10,10 +11,10 @@ const SearchBarResults = ({ results }) => {
 
   return (
     <div className={resultsClassName}>
-      {results.map((result, _id) => {
+      {results.map((result) => {
         return (
-          <Link to={`/product/${_id}`}>
-            <div key={_id}>{result.productName}</div>
+          <Link to={`/product/${result._id}`}>
+            <div key={result._id}>{result.productName}</div>
           </Link>
         );
       })}

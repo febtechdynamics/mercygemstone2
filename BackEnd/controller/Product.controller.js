@@ -8,6 +8,10 @@ const path = require("path");
 
 // create product
 exports.createProduct = catchAsync(async (req, res, next) => {
+  console.log(req.files);
+  // console.log(req.file);
+  // console.log(req.body);
+  const urls = [];
   try {
     const { productName, productPrice, productDescription, productCategory } =
       req.body;
@@ -17,7 +21,7 @@ exports.createProduct = catchAsync(async (req, res, next) => {
     }
 
     const uploader = async (path) => await uploads(path, "Images");
-    const urls = [];
+
     if (req.method === "POST") {
       const files = req.files;
 
@@ -56,6 +60,7 @@ exports.createProduct = catchAsync(async (req, res, next) => {
       url: urls, // Make sure to declare urls outside the if block if needed
     });
   } catch (error) {
+    console.log(error);
     urls.map((urlInfo) => {
       deleteImage(urlInfo.public_id);
     });
@@ -67,7 +72,7 @@ exports.createProduct = catchAsync(async (req, res, next) => {
 // get products
 
 exports.getAllProducts = catchAsync(async (req, res, next) => {
-  const perPage = parseInt(req.query.perPage) || 4; // Number of products per page, defaulting to 10
+  const perPage = parseInt(req.query.perPage) || 6; // Number of products per page, defaulting to 10
   const page = parseInt(req.query.page) || 1; // Page number, defaulting to 1
   const category = req.query.category; // Category filter
   const search = req.query.search; // Search filter
@@ -75,26 +80,30 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
   let query = {};
 
   // Apply category filter if provided
-  if (category) {
-    query.productCategory = category;
-  }
+  // if (category) {
+  //   query.productCategory = category;
+  // }
 
   // Apply search filter if provided
   if (search) {
+    query.productName = { $regex: search, $options: "i" };
+
     // Use a regular expression for case-insensitive partial matching
-    query.$or = [
-      { productName: { $regex: new RegExp(search, "i") } },
-      { productDescription: { $regex: new RegExp(search, "i") } },
-    ];
+    // query.$or = [
+    //   { productName: { $regex: new RegExp(search, "i") } },
+    //   { productDescription: { $regex: new RegExp(search, "i") } },
+    // ];
   }
 
   try {
     const products = await Product.find(query)
       .skip((page - 1) * perPage)
       .limit(perPage);
+    const totalItems = await Product.countDocuments(query);
     res.status(200).json({
       success: true,
       products,
+      totalItems,
     });
   } catch (error) {
     return new ErrorHandler(error.message, 500);
@@ -121,21 +130,59 @@ exports.getProductById = catchAsync(async (req, res, next) => {
 //edit product
 
 exports.updateProduct = catchAsync(async (req, res, next) => {
+  console.log(req.params);
+  console.log(req.body);
+  const { productName, productPrice, productDescription, productCategory } =
+    req.body;
+
   try {
-    // let product = await Product.findById(req.params.id);
-    // if (!product) {
-    //   return next(new ErrorHandler("Product not found", 404));
-    // }
-    // console.log(req.body);
-    // console.log(req.params);
-    await Product.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-      useFindAndModify: false,
-    });
-    return res.status(200).json({
+    let product = await Product.findById(req.params.id);
+    if (!productName || !productDescription || !productCategory) {
+      return next(new ErrorHandler("Please enter all fields", 400));
+    }
+    product.productName = productName;
+    product.productPrice = productPrice;
+    product.productDescription = productDescription;
+    product.productCategory = productCategory;
+
+    if (req.files && req.files.length > 0) {
+      const uploader = async (path) => await uploads(path, "Images");
+      const urls = [];
+
+      for (const file of req.files) {
+        const { path } = file;
+        try {
+          const newpath = await uploader(path);
+          urls.push(newpath);
+          fs.unlinkSync(path);
+        } catch (error) {
+          console.error("Error uploading to Cloudinary:", error);
+          return next(
+            new ErrorHandler("Error uploading image to Cloudinary", 500)
+          );
+        }
+      }
+
+      // Delete existing images associated with the product
+      product.productImage.forEach((image) => {
+        deleteImage(image.public_id);
+      });
+
+      // Update product images
+      product.productImage = urls.map((urlInfo) => ({
+        urls: urlInfo.url,
+        public_id: urlInfo.id,
+      }));
+    }
+
+    // Save updated product
+    await product.save();
+
+    // Send response to the client
+    res.status(200).json({
       success: true,
       message: "Product updated successfully",
+      product,
     });
   } catch (error) {
     return new ErrorHandler(error.message, 500);

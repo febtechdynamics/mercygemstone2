@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema(
     productCategory: {
       type: String,
       required: [true, "Please add a product category"],
-      enum: ["GemStone", "Industrial Materiales", "Jewelry", "Others"],
+      enum: ["GemStone", "Industrial Materials", "Jewelry", "Others"],
     },
     productImage: [
       {
