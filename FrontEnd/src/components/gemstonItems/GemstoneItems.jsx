@@ -21,7 +21,7 @@ const GemstoneItems = () => {
       .get(
         ` ${
           import.meta.env.VITE_REACT_APP_base_url
-        }/api/product/?category=GemStone&perPage=4&page=1`
+        }/api/product/?category=GemStone&perPage=3&page=1`
       )
       .then((response) => {
         console.log(response.data.products);

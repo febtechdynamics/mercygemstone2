@@ -80,9 +80,9 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
   let query = {};
 
   // Apply category filter if provided
-  // if (category) {
-  //   query.productCategory = category;
-  // }
+  if (category) {
+    query.productCategory = category;
+  }
 
   // Apply search filter if provided
   if (search) {

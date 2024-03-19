@@ -12,7 +12,7 @@ const IndustrialItems = () => {
       .get(
         ` ${
           import.meta.env.VITE_REACT_APP_base_url
-        }/api/product/?category=Industrial Materiales&perPage=6&page=1`
+        }/api/product/?category=Industrial Materials&perPage=3&page=1`
       )
       .then((response) => {
         console.log(response.data.products);
