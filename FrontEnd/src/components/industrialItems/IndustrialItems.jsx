@@ -10,7 +10,9 @@ const IndustrialItems = () => {
     // Fetch products from API or database
     axios
       .get(
-        "http://localhost:3000/api/product/?category=Industrial Materiales&perPage=6&page=1"
+        ` ${
+          import.meta.env.VITE_REACT_APP_base_url
+        }/api/product/?category=Industrial Materiales&perPage=6&page=1`
       )
       .then((response) => {
         console.log(response.data.products);

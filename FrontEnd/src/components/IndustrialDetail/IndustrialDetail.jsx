@@ -9,10 +9,12 @@ const IndustrialDetail = () => {
   const [product, setProduct] = useState({});
   useEffect(() => {
     // Fetch products from API or database
-    axios.get(`http://localhost:3000/api/product/${id}`).then((response) => {
-      console.log(response.data.product);
-      setProduct(response.data.product);
-    });
+    axios
+      .get(` ${import.meta.env.VITE_REACT_APP_base_url}/api/product/${id}`)
+      .then((response) => {
+        console.log(response.data.product);
+        setProduct(response.data.product);
+      });
   }, [id]);
 
   if (!product) {
