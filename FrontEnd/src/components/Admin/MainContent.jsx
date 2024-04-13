@@ -15,9 +15,9 @@ function MainContent({
 }) {
   return (
     <div className="main-content">
-      <button className="mb-2" onClick={() => setShowSideBar(!showSideBar)}>
+      {/* <button className="mb-2" onClick={() => setShowSideBar(!showSideBar)}>
         <MdMenuOpen size={40} />
-      </button>
+      </button> */}
       {activeTab == null && (
         <div>
           <h3>Welcome to Admin Dashboard</h3>
@@ -59,7 +59,7 @@ function MainContent({
           </div>
         </div>
       )}
-      {activeTab === "users" && (
+      {/* {activeTab === "users" && (
         <UserList
           handleEdit={handleEdit}
           handleDelete={handleDelete}
@@ -72,7 +72,7 @@ function MainContent({
           handleDelete={handleDelete}
           handleAddProduct={handleAddProduct}
         />
-      )}
+      )} */}
     </div>
   );
 }

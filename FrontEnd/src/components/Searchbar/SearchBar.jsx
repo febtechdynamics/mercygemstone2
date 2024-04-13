@@ -32,6 +32,7 @@ const SearchBar = ({ setResults }) => {
         <input
           placeholder="Search..."
           value={input}
+          className="text-gray-600 "
           onChange={(e) => handleChange(e.target.value)}
         />
       </div>

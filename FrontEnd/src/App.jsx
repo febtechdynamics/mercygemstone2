@@ -19,6 +19,9 @@ import { useEffect, useState } from "react";
 import Admin from "./components/Admin/Admin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AdminPanel from "./components/Admin/AdminPannel";
+import UserList from "./components/Admin/UserList";
+import ProductList from "./components/Admin/ProductList";
 
 function App() {
   const { pathname } = useLocation();
@@ -41,9 +44,12 @@ function App() {
           <Route path="/gemston-list" element={<GemstoneList />} />
           <Route path="/industrial-list" element={<IndustrialList />} />
           {/* Only render Admin route if user is logged in */}
-          <Route path="/admin" element={<Admin />} />
-          <Route path="*" element={<Four0Four />} />
         </Route>
+        <Route path="/admin" element={<AdminPanel />}>
+          <Route path="/admin/users" element={<UserList />} />
+          <Route path="/admin/products" element={<ProductList />} />
+        </Route>
+        <Route path="*" element={<Four0Four />} />
       </Routes>
       <ToastContainer
         position="top-center"

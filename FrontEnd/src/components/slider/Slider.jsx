@@ -1,18 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Slider = () => {
   return (
     <>
       <section className="slider_section position-relative">
-        <div className="design-box">
-          <img src="images/design-1.png" alt=""/>
-        </div>
-        <div className="slider_number-container d-none d-md-block">
+        {/* <div className="design-box">
+          <img src="images/design-1.png" alt="" />
+        </div> */}
+        {/* <div className="slider_number-container d-none d-md-block">
           <div className="number-box"></div>
-        </div>
+        </div> */}
         <div className="container">
-          <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+          <div
+          // id="carouselExampleIndicators"
+          // className="carousel slide"
+          // data-ride="carousel"
+          >
             <div className="carousel-inner">
               <div className="carousel-item active">
                 <div className="row">
@@ -21,11 +25,14 @@ const Slider = () => {
                       <h2>
                         <span>Ethiopian</span>
                       </h2>
-                      <h1>
-                        Gemstone
-                      </h1>
+                      <h1>Gemstone</h1>
                       <p>
-                        Get all kinds of Gemstone and Industrial material in Ethiopia.
+                        Discover the allure of exquisite gemstones and essential
+                        industrial materials, right here in Ethiopia. Explore
+                        our curated collection to find the perfect gemstone or
+                        industrial material for your needs. From timeless
+                        elegance to practical utility, we have it all waiting
+                        for you.
                       </p>
                       <div>
                         <Link to="/contact">Contact Us</Link>
@@ -33,8 +40,8 @@ const Slider = () => {
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <div className="img-box">
-                      <img src="images/opal.png" alt=""/>
+                    <div className="">
+                      <img src="images/opal.png" alt="" />
                     </div>
                   </div>
                 </div>

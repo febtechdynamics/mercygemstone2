@@ -13,7 +13,7 @@ const SearchBarResults = ({ results }) => {
     <div className={resultsClassName}>
       {results.map((result) => {
         return (
-          <Link to={`/product/${result._id}`}>
+          <Link className="hover:text-yellow-700" to={`/product/${result._id}`}>
             <div key={result._id}>{result.productName}</div>
           </Link>
         );

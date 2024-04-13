@@ -18,9 +18,11 @@ const IndustrialItems = () => {
       });
   }, []);
   return (
-    <div className="industrial_container">
-      <h1 className="industrial_title">Industrial Material</h1>
-      <div className="industrial_material_container">
+    <div className="industrial_container py-5">
+      <h1 className="text-4xl pt-3 px-3  ">Industrial Materials</h1>
+      <div className="border-b-4 border-orange-500 inline-block pb-7 w-48"></div>
+
+      <div className="industrial_material_container mt-5">
         <div className="flex-container">
           {products?.map(({ _id, productName, productImage }) => (
             <Link key={_id} to={`/product/${_id}`} className="industrial_item">
