@@ -32,7 +32,7 @@ const ProductCard = ({ id, productImage, productName, productCategory }) => {
           fill="white"
         />
       </svg>
-      <div class="relative pt-10 px-10 flex items-center justify-center">
+      <div class="relative pt-10 px-10 w-full flex items-center justify-center">
         <div
           class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
           style={{
@@ -49,12 +49,14 @@ const ProductCard = ({ id, productImage, productName, productCategory }) => {
         /> */}
       </div>
       <div class="relative text-white px-6 pb-6 mt-6">
-        <span class="block opacity-75 -mb-1">{productCategory}</span>
+        <span class="block opacity-75 text-left text-sm -mb-1">
+          {productCategory}
+        </span>
         <div class="flex justify-between">
           <span class="block font-semibold text-xl">{productName}</span>
         </div>
         <Link
-          to={"#"}
+          to={`/product/${id}`}
           class="block hover:text-gray-700 bg-white rounded-full text-orange-500 text-xs font-bold px-3 py-2 mt-3 leading-none text-center items-center"
         >
           See More

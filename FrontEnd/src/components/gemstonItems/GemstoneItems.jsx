@@ -15,9 +15,12 @@ const GemstoneItems = () => {
     mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
   };
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   console.log(products);
+
   useEffect(() => {
     // Fetch products from API or database
+    setIsLoading(true);
     axios
       .get(
         "http://localhost:3000/api/product/?category=GemStone&perPage=4&page=1"
@@ -25,6 +28,11 @@ const GemstoneItems = () => {
       .then((response) => {
         console.log(response.data.products);
         setProducts(response.data.products);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
       });
   }, []);
 
@@ -39,6 +47,55 @@ const GemstoneItems = () => {
         transitionDuration={500}
         responsive={responsive}
       >
+        {isLoading && (
+          <div class="flex  items-center justify-center">
+            <div class="w-full p-3">
+              <div class="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
+                <div class="h-48 bg-gray-300"></div>
+                <div class="px-6 py-4">
+                  <div class="h-4 bg-gray-300 mb-2 w-2/3"></div>
+                  <div class="h-6 bg-gray-300 "></div>
+                </div>
+                <div class="px-6 pt-2 pb-2">
+                  <div class="h-4 bg-gray-300 "></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        {isLoading && (
+          <div class="flex  items-center justify-center">
+            <div class="w-full p-3">
+              <div class="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
+                <div class="h-48 bg-gray-300"></div>
+                <div class="px-6 py-4">
+                  <div class="h-4 bg-gray-300 mb-2 w-2/3"></div>
+                  <div class="h-6 bg-gray-300 "></div>
+                </div>
+                <div class="px-6 pt-2 pb-2">
+                  <div class="h-4 bg-gray-300 "></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        {isLoading && (
+          <div class="flex  items-center justify-center">
+            <div class="w-full p-3">
+              <div class="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
+                <div class="h-48 bg-gray-300"></div>
+                <div class="px-6 py-4">
+                  <div class="h-4 bg-gray-300 mb-2 w-2/3"></div>
+                  <div class="h-6 bg-gray-300 "></div>
+                </div>
+                <div class="px-6 pt-2 pb-2">
+                  <div class="h-4 bg-gray-300 "></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {products?.map(
           ({ _id, productName, productCategory, productImage }) => (
             <ProductCard
@@ -48,25 +105,6 @@ const GemstoneItems = () => {
               productName={productName}
               productCategory={productCategory}
             />
-
-            // <div key={_id} className="single_iteme">
-            //   {productImage?.map((images) => {
-            //     const productImage = (
-            //       <img
-            //         className="gemstone_image"
-            //         src={images?.urls}
-            //         alt={productName}
-            //       />
-            //     );
-            //     return productImage;
-            //   })}
-            //   <h3>{productName}</h3>
-            //   <p>
-            //     <Link to={`/product/${_id}`}>
-            //       <button>See More</button>
-            //     </Link>
-            //   </p>
-            // </div>
           )
         )}
       </Carousel>

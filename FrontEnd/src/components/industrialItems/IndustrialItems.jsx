@@ -20,16 +20,16 @@ const IndustrialItems = () => {
   return (
     <div className="industrial_container py-5">
       <h1 className="text-4xl pt-3 px-3  ">Industrial Materials</h1>
-      <div className="border-b-4 border-orange-500 inline-block pb-7 w-48"></div>
+      <div className="border-b-4 border-orange-500 inline-block pb-7 mb-4 w-48"></div>
 
       <div className="industrial_material_container mt-5">
         <div className="flex-container">
-          {products?.map(({ _id, productName, productImage }) => (
+          {products?.slice(0, 6)?.map(({ _id, productName, productImage }) => (
             <Link key={_id} to={`/product/${_id}`} className="industrial_item">
               {productImage?.map((images) => {
                 const productImage = (
                   <img
-                    className="industrial_material_image"
+                    className="industrial_material_image rounded-xl"
                     src={images?.urls}
                     alt={productName}
                   />
@@ -37,7 +37,7 @@ const IndustrialItems = () => {
                 return productImage;
               })}
 
-              <div className="industrial_hover">
+              <div className="industrial_hover px-4 rounded-full">
                 <p>View Details</p>
               </div>
             </Link>
