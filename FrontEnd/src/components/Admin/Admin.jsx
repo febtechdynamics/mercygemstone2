@@ -39,7 +39,7 @@ function Admin() {
         },
       };
       await axios.delete(
-        `http://localhost:3000/api/product/${productId}`,
+        ` ${import.meta.env.VITE_REACT_APP_base_url}/api/product/${productId}`,
         config
       );
 

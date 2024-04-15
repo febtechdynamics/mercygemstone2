@@ -23,7 +23,9 @@ const GemstoneItems = () => {
     setIsLoading(true);
     axios
       .get(
-        "http://localhost:3000/api/product/?category=GemStone&perPage=4&page=1"
+        ` ${
+          import.meta.env.VITE_REACT_APP_base_url
+        }/api/product/?category=GemStone&perPage=3&page=1`
       )
       .then((response) => {
         console.log(response.data.products);

@@ -10,7 +10,9 @@ function GemstoneList() {
     // Fetch products from API or database
     axios
       .get(
-        "http://localhost:3000/api/product/?category=GemStone&perPage=10&page=1"
+        ` ${
+          import.meta.env.VITE_REACT_APP_base_url
+        }/api/product/?category=GemStone&perPage=10&page=1`
       )
       .then((response) => {
         console.log(response.data.products);
