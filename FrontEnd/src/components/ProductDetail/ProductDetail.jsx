@@ -17,7 +17,7 @@ const ProductDetail = () => {
     axios
       .get(` ${import.meta.env.VITE_REACT_APP_base_url}/api/product/${id}`)
       .then((response) => {
-        console.log(response.data.product);
+        // console.log(response.data.product);
         setProduct(response.data.product);
         setIsLoading(false);
       })

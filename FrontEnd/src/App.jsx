@@ -24,6 +24,7 @@ import UserList from "./components/Admin/UserList";
 import ProductList from "./components/Admin/ProductList";
 import Products from "./components/Products/Products";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
+import ContactNew from "./components/contact/ContactNew";
 
 function App() {
   const { pathname } = useLocation();
@@ -43,7 +44,8 @@ function App() {
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/about" element={<AboutDetail />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact" element={<ContactNew />} />
+          {/* <Route path="/contact" element={<Contact />} /> */}
           {/* <Route path="/gemston-list" element={<GemstoneList />} />
           <Route path="/industrial-list" element={<IndustrialList />} /> */}
           <Route path="/products" element={<Products />} />

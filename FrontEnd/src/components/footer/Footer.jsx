@@ -51,7 +51,7 @@ const Footer = () => {
                 <div className="info_contact">
                   <Link className="flex h-5 items-center" to="/">
                     <img src={mailIcon} alt="Email" />
-                    <span>mercygems109@gmail.com</span>
+                    <span>mercygems109 @gmail.com</span>
                   </Link>
                 </div>
               </div>
