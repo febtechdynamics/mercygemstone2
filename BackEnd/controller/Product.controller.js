@@ -74,9 +74,11 @@ exports.createProduct = catchAsync(async (req, res, next) => {
 exports.getAllProducts = catchAsync(async (req, res, next) => {
   const perPage = parseInt(req.query.perPage) || 6; // Number of products per page, defaulting to 10
   const page = parseInt(req.query.page) || 1; // Page number, defaulting to 1
-  const category = req.query.category; // Category filter
+  let category = req.query.category; // Category filter
   const search = req.query.search; // Search filter
-
+  if (category == "All") {
+    category = "";
+  }
   let query = {};
 
   // Apply category filter if provided

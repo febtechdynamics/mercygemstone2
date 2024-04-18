@@ -27,7 +27,7 @@ const IndustrialItems = () => {
       <div className="industrial_material_container mt-5">
         <div className="flex-container">
           {products?.slice(0, 6)?.map(({ _id, productName, productImage }) => (
-            <Link key={_id} to={`/product/${_id}`} className="industrial_item">
+            <Link key={_id} to={`/products/${_id}`} className="industrial_item">
               {productImage?.map((images) => {
                 const productImage = (
                   <img

@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import "./gemstonItem.css";
 import ProductCard from "../ProductCard/ProductCard";
+import SkeletonCard from "../SkeletonCard/SkeletonCard";
 
 const GemstoneItems = () => {
   const responsive = {
@@ -49,54 +50,9 @@ const GemstoneItems = () => {
         transitionDuration={500}
         responsive={responsive}
       >
-        {isLoading && (
-          <div class="flex  items-center justify-center">
-            <div class="w-full p-3">
-              <div class="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
-                <div class="h-48 bg-gray-300"></div>
-                <div class="px-6 py-4">
-                  <div class="h-4 bg-gray-300 mb-2 w-2/3"></div>
-                  <div class="h-6 bg-gray-300 "></div>
-                </div>
-                <div class="px-6 pt-2 pb-2">
-                  <div class="h-4 bg-gray-300 "></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        {isLoading && (
-          <div class="flex  items-center justify-center">
-            <div class="w-full p-3">
-              <div class="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
-                <div class="h-48 bg-gray-300"></div>
-                <div class="px-6 py-4">
-                  <div class="h-4 bg-gray-300 mb-2 w-2/3"></div>
-                  <div class="h-6 bg-gray-300 "></div>
-                </div>
-                <div class="px-6 pt-2 pb-2">
-                  <div class="h-4 bg-gray-300 "></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        {isLoading && (
-          <div class="flex  items-center justify-center">
-            <div class="w-full p-3">
-              <div class="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
-                <div class="h-48 bg-gray-300"></div>
-                <div class="px-6 py-4">
-                  <div class="h-4 bg-gray-300 mb-2 w-2/3"></div>
-                  <div class="h-6 bg-gray-300 "></div>
-                </div>
-                <div class="px-6 pt-2 pb-2">
-                  <div class="h-4 bg-gray-300 "></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        {isLoading && <SkeletonCard />}
+        {isLoading && <SkeletonCard />}
+        {isLoading && <SkeletonCard />}
 
         {products?.map(
           ({ _id, productName, productCategory, productImage }) => (

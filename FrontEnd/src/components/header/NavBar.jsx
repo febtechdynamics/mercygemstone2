@@ -160,7 +160,7 @@ function NavBar() {
               <NavLink
                 className={({ isPending, isActive }) => {
                   return isActive
-                    ? " text-white text-lg duration-200 border-b-2 border-white px-3 py-1"
+                    ? " text-white text-lg duration-200 border-b-2 border-white px-3  py-1  "
                     : " text-white duration-200 hover:border-b-2 hover:border-white text-lg px-3 py-1";
                 }}
                 style={{ textDecoration: "none" }}

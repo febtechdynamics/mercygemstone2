@@ -22,6 +22,8 @@ import "react-toastify/dist/ReactToastify.css";
 import AdminPanel from "./components/Admin/AdminPannel";
 import UserList from "./components/Admin/UserList";
 import ProductList from "./components/Admin/ProductList";
+import Products from "./components/Products/Products";
+import ProductDetail from "./components/ProductDetail/ProductDetail";
 
 function App() {
   const { pathname } = useLocation();
@@ -37,12 +39,14 @@ function App() {
         <Route path="/" element={<Shared />}>
           {/* <Route path="/" element={<Home />} /> */}
           <Route path="/" element={<Home />} />
-          <Route path="/product/:id" element={<IndustrialDetail />} />
+          {/* <Route path="/product/:id" element={<IndustrialDetail />} /> */}
+          <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/about" element={<AboutDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/gemston-list" element={<GemstoneList />} />
-          <Route path="/industrial-list" element={<IndustrialList />} />
+          {/* <Route path="/gemston-list" element={<GemstoneList />} />
+          <Route path="/industrial-list" element={<IndustrialList />} /> */}
+          <Route path="/products" element={<Products />} />
           {/* Only render Admin route if user is logged in */}
         </Route>
         <Route path="/admin" element={<AdminPanel />}>
