@@ -136,11 +136,11 @@ const Features = ({ products }) => {
         </div>
 
         <div class="col-span-4 md:col-span-3">
-          <img class="rounded-xl" src={img3} alt="Image Description" />
+          <img class="rounded-xl" src={img4} alt="Image Description" />
         </div>
 
         <div class="col-span-4 md:col-span-3">
-          <img class="rounded-xl" src={img1} alt="Image Description" />
+          <img class="rounded-xl" src={img2} alt="Image Description" />
         </div>
       </div>
     </div>

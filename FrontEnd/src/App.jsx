@@ -25,6 +25,7 @@ import ProductList from "./components/Admin/ProductList";
 import Products from "./components/Products/Products";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import ContactNew from "./components/contact/ContactNew";
+import AboutNew from "./components/about/AboutNew";
 
 function App() {
   const { pathname } = useLocation();
@@ -42,7 +43,8 @@ function App() {
           <Route path="/" element={<Home />} />
           {/* <Route path="/product/:id" element={<IndustrialDetail />} /> */}
           <Route path="/products/:id" element={<ProductDetail />} />
-          <Route path="/about" element={<AboutDetail />} />
+          <Route path="/about" element={<AboutNew />} />
+          {/* <Route path="/about" element={<AboutDetail />} /> */}
           <Route path="/login" element={<Login />} />
           <Route path="/contact" element={<ContactNew />} />
           {/* <Route path="/contact" element={<Contact />} /> */}

@@ -51,8 +51,8 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="sticky">
-      <Container className="mercygem_bg" maxWidth="xl">
+    <AppBar className="mercygem_bg" position="sticky">
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Link to="/" className="mercy_logo">

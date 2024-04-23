@@ -4,6 +4,7 @@ import emailjs from "emailjs-com";
 
 const ContactNew = () => {
   const [sent, setSent] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -19,7 +20,8 @@ const ContactNew = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
+    setIsLoading(true);
     await emailjs
       .sendForm(
         "service_eidoz4j",
@@ -30,9 +32,11 @@ const ContactNew = () => {
       .then(
         (result) => {
           //    console.log(result.text);
+          setIsLoading(false);
           setSent(true);
         },
         (error) => {
+          setIsLoading(false);
           //    console.log(error.text);
           //    alert(
           //      "An error occurred while sending the Message. Please try again later."
@@ -147,9 +151,10 @@ const ContactNew = () => {
 
                 <button
                   type="submit"
+                  disabled={isLoading}
                   className="mb-6 w-full rounded bg-[#fb930a] text-white px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal   lg:mb-0"
                 >
-                  Send Message
+                  {isLoading ? "Sending ..." : "Send Message"}
                 </button>
               </form>
             </div>

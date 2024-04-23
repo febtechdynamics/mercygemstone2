@@ -56,7 +56,7 @@ const ProductCard = ({ id, productImage, productName, productCategory }) => {
           <span class="block font-semibold text-xl">{productName}</span>
         </div>
         <Link
-          to={`/product/${id}`}
+          to={`/products/${id}`}
           class="block hover:text-gray-700 bg-white rounded-full text-orange-500 text-xs font-bold px-3 py-2 mt-3 leading-none text-center items-center"
         >
           See More
