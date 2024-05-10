@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Modal from "./Modal"; // Import your Modal component
 import Products from "./Products"; // Import your Products component
-import { MdEdit, MdDelete } from "react-icons/md";
+
 import { IconButton, Pagination } from "@mui/material";
 import DeleteBtn from "./DeleteBtn";
 import EditIcon from "@mui/icons-material/Edit";
 import moment from "moment";
 import SingleCarousel from "../SingleCarosel/SingleCarosel";
 
-function ProductList({ handleEdit, handleDelete }) {
+function ProductList() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
@@ -103,9 +103,9 @@ function ProductList({ handleEdit, handleDelete }) {
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       className="feather feather-search"
                     >
                       <circle cx="11" cy="11" r="8"></circle>
@@ -135,35 +135,24 @@ function ProductList({ handleEdit, handleDelete }) {
               <section className="row">
                 {products?.products?.length > 0 &&
                   products?.products?.map(
-                    (
-                      {
-                        _id,
-                        productName,
-                        productImage,
-                        productPrice,
-                        productDescription,
-                        productCategory,
-                        createdAt,
-                      },
-                      index
-                    ) => {
+                    ({
+                      _id,
+                      productName,
+                      productImage,
+                      productPrice,
+                      productDescription,
+                      productCategory,
+                      createdAt,
+                    }) => {
                       return (
-                        <div className="col-md-4 mt-5 col-sm-12">
+                        <div key={_id} className="col-md-4 mt-5 col-sm-12">
                           <div
                             className="card shadow-sm border-0 rounded"
                             style={{ height: "470px" }}
                           >
                             <div className="card-body p-0">
                               {productImage && (
-                                <div
-                                // src={productImage[0]?.urls}
-                                // alt=""
-                                // className="w-100 card-img-top "
-                                // style={{
-                                //   maxHeight: "200px",
-                                //   objectFit: "cover",
-                                // }}
-                                >
+                                <div>
                                   <SingleCarousel images={productImage} />
                                 </div>
                               )}

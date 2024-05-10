@@ -1,117 +1,34 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { Outlet, NavLink, Link } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import SecurityIcon from "@mui/icons-material/Security";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import MainContent from "./MainContent";
-import { Outlet, NavLink } from "react-router-dom";
-import { Button } from "@mui/material";
-import { MdVerifiedUser } from "react-icons/md";
+import { IconButton } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { logout } from "../Redux/reducers/authSlice";
 
-const drawerWidth = 240;
-
-function AdminPanel(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
-
-  const handleDrawerClose = () => {
-    setIsClosing(true);
-    setMobileOpen(false);
-  };
-
-  const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
-  };
-
-  const handleDrawerToggle = () => {
-    if (!isClosing) {
-      setMobileOpen(!mobileOpen);
-    }
-  };
-
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        {/* {["Users", "Products"].map((text, index) => ( */}
-        <NavLink
-          to={"/admin/users"}
-          style={{ textDecoration: "none", color: "black" }}
-          className={({ isActive, isPending }) => {
-            return isActive ? "custom-bg" : "";
-          }}
-        >
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MdVerifiedUser />
-              </ListItemIcon>
-              <ListItemText primary={"Users"} />
-            </ListItemButton>
-          </ListItem>
-        </NavLink>
-        <NavLink
-          to="/admin/products"
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MdVerifiedUser />
-              </ListItemIcon>
-              <ListItemText primary={"Products"} />
-            </ListItemButton>
-          </ListItem>
-        </NavLink>
-        {/* ))} */}
-      </List>
-      <Divider />
-      <List sx={{ textAlign: "center", mt: "65vh" }}>
-        <Button>Sign Out</Button>
-      </List>
-    </div>
-  );
-
-  // Remove this const when copying and pasting into your project.
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
+function AdminPanel() {
+  // const { user, isLoading, isAuth } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const logOut = () => dispatch(logout());
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className="custom-bg"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
+      <AppBar position="fixed" className="custom-bg">
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Box
             sx={{
               display: "flex",
@@ -119,76 +36,127 @@ function AdminPanel(props) {
               width: "100%",
             }}
           >
-            <Typography variant="h6" noWrap component="div">
-              MercyGem Admin Panel
-            </Typography>
+            <Box sx={{ display: "flex", gap: "10px" }}>
+              <div className="flex gap-3 items-center">
+                <Link to={"/admin"}>
+                  <SecurityIcon />
+                </Link>
+                <Typography variant="h6" noWrap component="div">
+                  MercyGem Admin
+                </Typography>
+              </div>
+              <section className="hidden lg:flex items-center gap-3">
+                <NavLink
+                  className={({ isActive }) => {
+                    return isActive
+                      ? " text-gray-700 bg-white rounded-full  duration-200 px-3"
+                      : "duration-200 hover:text-gray-700 hover:bg-white hover:rounded-full    px-3";
+                  }}
+                  style={{ textDecoration: "none" }}
+                  key={"products"}
+                  to={"/admin/products"}
+                >
+                  Products
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) => {
+                    return isActive
+                      ? " text-gray-700 bg-white rounded-full duration-200 px-3"
+                      : "duration-200 hover:text-gray-700 hover:bg-white hover:rounded-full     px-3";
+                  }}
+                  style={{ textDecoration: "none" }}
+                  key={"products"}
+                  to={"/admin/users"}
+                >
+                  Users
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) => {
+                    return isActive
+                      ? " text-gray-700 bg-white rounded-full  duration-200 px-3"
+                      : "duration-200 hover:text-gray-700 hover:bg-white hover:rounded-full     px-3";
+                  }}
+                  style={{ textDecoration: "none" }}
+                  key={"products"}
+                  to={"/"}
+                >
+                  Home
+                </NavLink>
+              </section>
+            </Box>
             <Box>
-              <Button>Home</Button>
-              <Button>SignOut</Button>
+              <button
+                onClick={logOut}
+                className="bg-red-500 px-3 py-1 rounded-full hover:bg-red-600 duration-200 ease-in"
+              >
+                Sign Out
+              </button>
             </Box>
           </Box>
         </Toolbar>
       </AppBar>
       <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onTransitionEnd={handleDrawerTransitionEnd}
-          onClose={handleDrawerClose}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
         <Toolbar />
+        <div className="block lg:hidden">
+          <DrawerPopUp />
+        </div>
         <Outlet />
       </Box>
     </Box>
   );
 }
 
-AdminPanel.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * Remove this when copying and pasting into your project.
-   */
-  window: PropTypes.func,
-};
+function DrawerPopUp() {
+  const [open, setOpen] = React.useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
+  const DrawerList = (
+    <Box
+      sx={{ width: 250, marginTop: "20px" }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+    >
+      <List>
+        {[
+          { link: "/admin/products", name: "Products" },
+          { link: "/admin/users", name: "Users" },
+          { link: "/", name: "Home Page" },
+        ].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <Link className="flex items-center" to={text.link}>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text.name} />
+              </Link>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+    </Box>
+  );
+
+  return (
+    <div className="flex justify-end">
+      <IconButton onClick={toggleDrawer(true)} aria-label="delete">
+        <MenuIcon />
+      </IconButton>
+      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+        {DrawerList}
+      </Drawer>
+    </div>
+  );
+}
 
 export default AdminPanel;

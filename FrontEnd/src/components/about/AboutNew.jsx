@@ -6,7 +6,7 @@ const AboutNew = () => {
       <div className="bg-yellow-50  p-4">
         <div className="container mx-auto pt-12 pb-20">
           <h1 className=" text-4xl tracking-tight font-semibold text-primary-100 text-gray-700 text-center mb-8">
-            Discovery Mercygems ,
+            Discover Mercygems ,
           </h1>
           <hr className="mt-3 mb-1 text-2xl font-medium text-yellow-400 py-3 " />
           <p className="text-gray-700 text-lg leading-1 ">

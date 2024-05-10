@@ -3,11 +3,14 @@ import "./Login.css";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getUser } from "../Redux/reducers/authSlice";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   let navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -38,7 +41,11 @@ function Login() {
       const token = response.data.token;
       localStorage.setItem("token", token);
       setIsLoading(false); // Set token in local storage
-      navigate("/admin");
+
+      dispatch(getUser(token));
+      setTimeout(() => {
+        navigate("/admin");
+      }, [1000]);
       toast.success(response.data.message);
     } catch (error) {
       console.error("Login Error:", error);

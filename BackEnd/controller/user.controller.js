@@ -139,6 +139,7 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
 });
 
 exports.getMe = catchAsync(async (req, res, next) => {
+  // console.log(req.user);
   res.status(200).json({
     status: true,
     me: req.user,

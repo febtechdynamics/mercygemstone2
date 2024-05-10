@@ -1,22 +1,13 @@
 import "./App.css";
 import Home from "./components/home/Home";
-import {
-  Routes,
-  Route,
-  useLocation,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Shared from "./components/sharedlayout/Shared";
-import AboutDetail from "./components/about/AboutDetail";
+
 import Login from "./components/login/Login";
-import Contact from "./components/contact/Contact";
-import IndustrialDetail from "./components/IndustrialDetail/IndustrialDetail";
-import GemstoneList from "./components/GemstonList/GemstonList";
-import IndustrialList from "./components/IndutrialList/IndustrialList";
+
 import Four0Four from "./components/Four0Frour/Four0Four";
-import { useEffect, useState } from "react";
-import Admin from "./components/Admin/Admin";
+import { useEffect } from "react";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminPanel from "./components/Admin/AdminPannel";
@@ -26,14 +17,26 @@ import Products from "./components/Products/Products";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import ContactNew from "./components/contact/ContactNew";
 import AboutNew from "./components/about/AboutNew";
+import ProtectedRoutes from "./components/Admin/ProtectedRoute";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "./components/Redux/reducers/authSlice";
+import MainContent from "./components/Admin/MainContent";
 
 function App() {
   const { pathname } = useLocation();
+  const { isAuth, user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    dispatch(getUser(token));
+  }, [isAuth, navigate]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
+  console.log(user);
   return (
     <>
       {/* <ScrollToTop /> */}
@@ -53,7 +56,15 @@ function App() {
           <Route path="/products" element={<Products />} />
           {/* Only render Admin route if user is logged in */}
         </Route>
-        <Route path="/admin" element={<AdminPanel />}>
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoutes>
+              <AdminPanel />
+            </ProtectedRoutes>
+          }
+        >
+          <Route path="/admin" element={<MainContent />} />
           <Route path="/admin/users" element={<UserList />} />
           <Route path="/admin/products" element={<ProductList />} />
         </Route>
