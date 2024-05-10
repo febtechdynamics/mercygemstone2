@@ -27,13 +27,21 @@ const Slider = () => {
                       </h2>
                       <h1>Gemstone</h1>
                       <p>
-                        Discover the allure of exquisite gemstones and essential
-                        industrial materials, right here in Ethiopia. Explore
-                        our curated collection to find the perfect gemstone or
-                        industrial material for your needs. From timeless
-                        elegance to practical utility, we have it all waiting
-                        for you.
+                        Welcome to Mercy Gem, where quality meets excellence in
+                        the world of gemstones and minerals. As a leading
+                        exporter, we take pride in delivering top-notch products
+                        to our valued customers worldwide.
                       </p>
+                      <p className="pt-4">
+                        Our specialty lies in Ethiopian Opals, where nature's
+                        artistry comes alive with a mesmerizing play of colors.
+                        As you browse through our collection, you'll discover
+                        the captivating allure of Ethiopian Opals, renowned for
+                        their uniqueness and brilliance. Each opal is carefully
+                        sourced from the rich mines of Ethiopia, ensuring that
+                        you receive only the finest quality stones.
+                      </p>
+
                       <div>
                         <Link to="/contact">Contact Us</Link>
                       </div>
