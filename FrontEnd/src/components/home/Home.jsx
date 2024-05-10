@@ -1,10 +1,11 @@
-import About from "../about/About";
+// import About from "../about/About";
 import Youtube from "../youtube/Youtube";
 import Slider from "../slider/Slider";
 import GemstoneItems from "../gemstonItems/GemstoneItems";
 import IndustrialItems from "../industrialItems/IndustrialItems";
 import Features from "../Features/Features";
 import { motion } from "framer-motion";
+import ProductInfo from "../ProductInfo/ProductInfo";
 
 const Home = () => {
   return (
@@ -33,6 +34,7 @@ const Home = () => {
       >
         <Features />
       </motion.div>
+      <ProductInfo />
       <GemstoneItems />
 
       <IndustrialItems />

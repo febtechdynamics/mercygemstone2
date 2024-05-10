@@ -308,7 +308,7 @@ const Features = ({ products }) => {
               </svg> */}
             </div>
             <h1 className="text-darken mb-3 pt-3 text-xl font-medium lg:h-14 lg:px-14">
-              Specialization in Ethiopian Opals
+              Ethiopian Opals
             </h1>
             <p className="px-4 text-gray-500">
               We specialize in Ethiopian Opals, known for their mesmerizing play
