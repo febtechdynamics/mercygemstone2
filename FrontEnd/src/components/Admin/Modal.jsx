@@ -1,5 +1,7 @@
 import React from "react";
 import "./Modal.css"; // Import your custom CSS file for styling modal
+import { IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 function Modal({ children, onClose }) {
   const handleClose = () => {
@@ -11,12 +13,15 @@ function Modal({ children, onClose }) {
   });
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button className="close-btn custom-btn " onClick={handleClose}>
-          &times;
-        </button>
-        {childrenWithProps} {/* Render children components within the modal */}
+    <div className="modal-overlay z-10">
+      <div className="modal-content mt-3 z-10 lg:w-1/3 md:w-3/4">
+        <div className="flex justify-end">
+          <IconButton color="error" aria-label="delete" onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
+        </div>
+
+        {childrenWithProps}
       </div>
     </div>
   );

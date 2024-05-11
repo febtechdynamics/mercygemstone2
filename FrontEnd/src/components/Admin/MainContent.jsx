@@ -47,7 +47,7 @@ function MainContent() {
 
   return (
     <>
-      <div className="main-content">
+      <div className="main-content h-screen">
         {
           <div>
             <h3 className="text-2xl text-gray-700">

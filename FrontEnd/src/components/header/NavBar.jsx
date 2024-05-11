@@ -17,6 +17,7 @@ import { Link, NavLink } from "react-router-dom";
 import Search from "../Searchbar/Search";
 import SearchIcon from "@mui/icons-material/Search";
 import SearchBar from "./SearchBar";
+import { useSelector } from "react-redux";
 
 const pages = [
   { title: "Home", link: "/" },
@@ -28,7 +29,7 @@ const pages = [
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const { isAuth, user } = useSelector((state) => state.auth);
   const [isSearchVisible, setIsSearchVisible] = React.useState(false);
 
   const toggleSearchVisibility = () => {
@@ -95,6 +96,7 @@ function NavBar() {
               sx={{
                 display: { xs: "block", md: "none" },
                 justifyContent: "flex-end",
+
                 "& .MuiPaper-root": {
                   border: "none", // Remove default border
                   outline: "none", // Remove default outline
@@ -123,6 +125,27 @@ function NavBar() {
                   </NavLink>
                 </MenuItem>
               ))}
+              {isAuth && user && (
+                <MenuItem
+                  className="decoration-transparent border-none outline-none"
+                  sx={{ border: "none", outline: "none" }}
+                  onClick={handleCloseNavMenu}
+                >
+                  <NavLink
+                    className={({ isPending, isActive }) => {
+                      return isActive
+                        ? " text-gray-700 text-lg duration-200 border-b-2 border-white px-3 py-1"
+                        : " text-gray-700 duration-200 hover:border-b-2 hover:border-white text-lg px-3 py-1";
+                    }}
+                    style={{ textDecoration: "none" }}
+                    to={"/admin"}
+                    // onClick={handleCloseNavMenu}
+                  >
+                    Admin
+                  </NavLink>
+                  {/* <Link to={"/admin"}>Admin</Link> */}
+                </MenuItem>
+              )}
             </Menu>
           </Box>
 
@@ -154,6 +177,7 @@ function NavBar() {
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
               justifyContent: "end",
+              alignItems: "center",
             }}
           >
             {pages?.map((page, i) => (
@@ -171,6 +195,14 @@ function NavBar() {
                 {page?.title}
               </NavLink>
             ))}
+            {isAuth && user && (
+              <Link
+                className="border border-1 border-white px-2 rounded-2xl no-underline hover:no-underline"
+                to={"/admin"}
+              >
+                Admin
+              </Link>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

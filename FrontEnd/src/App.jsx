@@ -11,8 +11,8 @@ import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminPanel from "./components/Admin/AdminPannel";
-import UserList from "./components/Admin/UserList";
-import ProductList from "./components/Admin/ProductList";
+import UserList from "./components/Admin/User/UserList";
+import ProductList from "./components/Admin/Product/ProductList";
 import Products from "./components/Products/Products";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import ContactNew from "./components/contact/ContactNew";
@@ -24,7 +24,7 @@ import MainContent from "./components/Admin/MainContent";
 
 function App() {
   const { pathname } = useLocation();
-  const { isAuth, user } = useSelector((state) => state.auth);
+  c;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");

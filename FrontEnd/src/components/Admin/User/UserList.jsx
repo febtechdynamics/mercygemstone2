@@ -1,4 +1,4 @@
-import Modal from "./Modal"; // Import your Modal component
+import Modal from "../Modal"; // Import your Modal component
 import AddUser from "./AddUser";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -19,7 +19,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Swal from "sweetalert2";
-import DeleteBtn from "./DeleteBtn";
+import DeleteBtn from "../DeleteBtn";
 
 function UserList({ handleDelete }) {
   const [users, setUsers] = useState([]);

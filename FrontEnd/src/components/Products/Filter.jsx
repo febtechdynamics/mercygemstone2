@@ -5,24 +5,24 @@ const Filter = ({ options, setOptions, showOptions, setShowOptions }) => {
 
   return (
     <div>
-      <div class="flex">
-        <div class=" px-3  md:w-[230px] w-full text-gray-900 dark:text-gray-100">
-          <div class="relative w-full group">
-            <label class="text-xs text-gray-600">Select Category</label>
+      <div className="flex">
+        <div className=" px-3  md:w-[230px] w-full text-gray-900 dark:text-gray-100">
+          <div className="relative w-full group">
+            <label className="text-xs text-gray-600">Select Category</label>
             <button
-              class="text-gray-600 py-2.5 px-3 w-full md:text-sm text-site bg-transparent border border-dimmed  focus:border-brand focus:outline-none focus:ring-0 peer flex items-center justify-between rounded font-semibold"
+              className="text-gray-600 py-2.5 px-3 w-full md:text-sm text-site bg-transparent border border-dimmed  focus:border-brand focus:outline-none focus:ring-0 peer flex items-center justify-between rounded font-semibold"
               onClick={() => setShowOptions(!showOptions)}
             >
               {options}
             </button>
 
             <div
-              class={`absolute z-[99] top-[100%] left-[50%] translate-x-[-50%] rounded-md overflow-hidden shadow-lg min-w-[200px] w-max peer-focus:visible peer-focus:opacity-100 ${
+              className={`absolute z-[99] top-[100%] left-[50%] translate-x-[-50%] rounded-md overflow-hidden shadow-lg min-w-[200px] w-max peer-focus:visible peer-focus:opacity-100 ${
                 !showOptions ? "opacity-0 invisible" : ""
               }  duration-200 p-1 bg-gray-100   border border-dimmed text-xs md:text-sm text-gray-600`}
             >
               <div
-                class=" w-full block text-gray-600 cursor-pointer hover:bg-white   hover:text-link px-3 py-2 rounded-md"
+                className=" w-full block text-gray-600 cursor-pointer hover:bg-white   hover:text-link px-3 py-2 rounded-md"
                 onClick={() => {
                   setOptions("All");
                   setShowOptions(false);
@@ -33,7 +33,7 @@ const Filter = ({ options, setOptions, showOptions, setShowOptions }) => {
               {optionsData?.map((option) => (
                 <div
                   key={option}
-                  class=" w-full block text-gray-600 cursor-pointer hover:bg-white   hover:text-link px-3 py-2 rounded-md"
+                  className=" w-full block text-gray-600 cursor-pointer hover:bg-white   hover:text-link px-3 py-2 rounded-md"
                   onClick={() => {
                     setOptions(option);
                     setShowOptions(false);
@@ -42,24 +42,6 @@ const Filter = ({ options, setOptions, showOptions, setShowOptions }) => {
                   {option}
                 </div>
               ))}
-              {/* <div
-                class=" w-full block text-gray-600 cursor-pointer hover:bg-white   hover:text-link px-3 py-2 rounded-md"
-                onClick={() => {
-                  setOptions("Gemstones");
-                  setShowOptions(false);
-                }}
-              >
-                GemStone
-              </div>
-              <div
-                class=" w-full block text-gray-600 cursor-pointer hover:bg-white   hover:text-link px-3 py-2 rounded-md"
-                onClick={() => {
-                  setOptions("Industry Materials");
-                  setShowOptions(false);
-                }}
-              >
-                Industrial Materials
-              </div> */}
             </div>
           </div>
         </div>
