@@ -13,10 +13,9 @@ const {
 const router = express.Router(); // Corrected to call express.Router
 
 router.post("/", auth, upload.array("file"), createProduct);
-
 router.get("/", getAllProducts); // Corrected function name from getAllProduct to getAllProducts
 router.get("/:id", getProductById);
-router.patch("/:id", auth, updateProduct);
+router.put("/:id", auth, upload.array("file"), updateProduct);
 router.delete("/:id", auth, deleteProduct);
 
 module.exports = router;

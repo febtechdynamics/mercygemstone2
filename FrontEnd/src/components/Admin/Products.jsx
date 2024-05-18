@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "./products.css"; // Import your custom CSS file
 import { useForm } from "react-hook-form";
+import PropTypes from "prop-types";
 
 function Products({
   closeModal,
@@ -11,14 +11,11 @@ function Products({
   setSubmitting,
   submitting,
 }) {
-  // console.log(currentProduct);
-  console.log(mode);
-
   const {
     register,
     handleSubmit,
-    watch,
-    reset,
+    // watch,
+    // reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -36,8 +33,11 @@ function Products({
     console.log(submittedData);
     let formData = new FormData();
     if (submittedData.productImage?.length > 0) {
-      for (let i = 0; i < submittedData.productImage?.length; i++) {
-        formData.append("file", submittedData.productImage[i]);
+      if (!submittedData?.productImage[0].urls) {
+        for (let i = 0; i < submittedData.productImage?.length; i++) {
+          formData.append("file", submittedData.productImage[i]);
+        }
+        console.log("file added");
       }
     }
     submittedData.productImage &&
@@ -53,6 +53,7 @@ function Products({
     let config = {
       headers: {
         // "Content-Type": "multipart/form-data",
+        "Content-Type": "application/x-www-form-urlencoded",
         Authorization: `Bearer ${token}`,
       },
     };
@@ -69,7 +70,8 @@ function Products({
         closeModal();
       }
       if (mode == "edit") {
-        let response = await axios.patch(
+        console.log(formData.get("productName"));
+        let response = await axios.put(
           `${import.meta.env.VITE_REACT_APP_base_url}/api/product/${
             currentProduct?._id
           }`,
@@ -103,8 +105,11 @@ function Products({
     }
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="px-3 py-2 z-10">
-      <div className="form-group">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="px-3 py-2 z-[100] overflow-y-scroll hide-scrollbar"
+    >
+      <div className="">
         <label htmlFor="productName" className="text-gray-500 text-sm">
           Product Name
         </label>
@@ -118,9 +123,6 @@ function Products({
               : ""
           }`}
         />
-        {/* {errors?.productName && (
-          <small className="text-danger">{errors?.productName?.message}</small>
-        )} */}
       </div>
 
       <div className="form-group">
@@ -129,12 +131,9 @@ function Products({
         </label>
         <select
           name="productCategory"
-          // value={productCategory}
-          // onChange={(e) => setProductCategory(e.target.value)}
           {...register("productCategory", {
             required: "product category is required",
           })}
-          // className="form-control"
           className={`form-control ${
             errors?.productName?.message
               ? " outline outline-1 outline-red-500 form-control"
@@ -146,11 +145,6 @@ function Products({
           <option value="Jewelry">Jewelry</option>
           <option value="Others">Others</option>
         </select>
-        {/* {errors?.productCategory && (
-          <small className="text-danger">
-            {errors?.productCategory?.message}
-          </small>
-        )} */}
       </div>
 
       <div className="form-group">
@@ -160,8 +154,6 @@ function Products({
         <input
           type="number"
           name="productPrice"
-          // value={productPrice}
-          // onChange={(e) => setProductPrice(e.target.value)}
           {...register("productPrice", {
             required: "product price is required",
           })}
@@ -171,9 +163,6 @@ function Products({
               : ""
           }`}
         />
-        {/* {errors?.productPrice && (
-          <small className="text-danger">{errors?.productPrice?.message}</small>
-        )} */}
       </div>
 
       <div className="form-group">
@@ -183,8 +172,6 @@ function Products({
         <textarea
           name="productDescription"
           rows={3}
-          // value={productDescription}
-          // onChange={(e) => setProductDescription(e.target.value)}
           {...register("productDescription", {
             required: "product description is required",
           })}
@@ -194,11 +181,6 @@ function Products({
               : ""
           }`}
         />
-        {/* {errors?.productDescription && (
-          <small className="text-danger">
-            {errors?.productDescription?.message}
-          </small>
-        )} */}
       </div>
 
       <div className="form-group">
@@ -210,6 +192,7 @@ function Products({
             <>
               {currentProduct?.productImage?.map((img) => (
                 <img
+                  key={img.urls}
                   width={30}
                   height={30}
                   src={img?.urls}
@@ -224,7 +207,6 @@ function Products({
             name="productImage"
             id="file-input"
             accept=".jpg,.jpeg,.png"
-            // onChange={handleFileInputChange}
             multiple={true}
             {...register("productImage", {
               required: currentProduct?.productImage
@@ -238,9 +220,6 @@ function Products({
             }`}
           />
         </div>
-        {/* {errors?.productImage && (
-          <small className="text-danger">{errors?.productImage?.message}</small>
-        )} */}
       </div>
 
       <div className="flex  items-center justify-between">
@@ -270,32 +249,17 @@ function Products({
           )}
           {formBtnText()}
         </button>
-        {/* <button
-          type="submit"
-          className="w-50  btn-color btn mt-3"
-          disabled={submitting}
-        >
-          {submitting ? (
-            <div className="w-100 d-flex gap-3 justify-content-center align-items-center">
-              <span
-                class="mr-3 spinner-border spinner-border-sm"
-                role="status"
-              ></span>
-              {mode == "add" ? <div>Adding ...</div> : <div>Updating ...</div>}
-            </div>
-          ) : (
-            <>
-              {mode == "add" ? (
-                <div>Add Product</div>
-              ) : (
-                <div>Update Product</div>
-              )}
-            </>
-          )}
-        </button> */}
       </div>
     </form>
   );
 }
+
+Products.propTypes = {
+  closeModal: PropTypes.func,
+  currentProduct: PropTypes.object,
+  mode: PropTypes.string,
+  setSubmitting: PropTypes.func,
+  submitting: PropTypes.bool,
+};
 
 export default Products;

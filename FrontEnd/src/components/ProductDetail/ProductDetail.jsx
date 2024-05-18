@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import DetailsLoader from "./DetailsLoader";
 import SingleCarousel from "../SingleCarosel/SingleCarosel";
 import { useParams } from "react-router";
@@ -41,11 +41,11 @@ const ProductDetail = () => {
       </div>
       <section>
         {product && (
-          <div class="bg-gray-100  pt-10 pb-40">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div class="flex flex-col md:flex-row -mx-4">
-                <div class="md:flex-1 px-4">
-                  <div class="md:h-[460px] relative rounded-lg bg-gray-300 mb-4">
+          <div className="bg-gray-100  pt-10 pb-40">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col md:flex-row -mx-4">
+                <div className="md:flex-1 px-4">
+                  <div className="md:h-[460px] relative rounded-lg bg-gray-300 mb-4">
                     <SingleCarousel
                       height={"460px"}
                       thumb={true}
@@ -53,15 +53,15 @@ const ProductDetail = () => {
                     />
                   </div>
                 </div>
-                <div class="md:flex-1 px-4">
-                  <h2 class="text-2xl font-bold text-gray-800  mb-2">
+                <div className="md:flex-1 px-4">
+                  <h2 className="text-2xl font-bold text-gray-800  mb-2">
                     {product?.productName}
                   </h2>
 
-                  <div class="flex mb-4">
-                    <div class="mr-4">
-                      <span class="font-bold text-gray-700">Price:</span>
-                      <span class="text-gray-600">
+                  <div className="flex mb-4">
+                    <div className="mr-4">
+                      <span className="font-bold text-gray-700">Price:</span>
+                      <span className="text-gray-600">
                         {" "}
                         ${product?.productPrice}
                       </span>
@@ -69,17 +69,17 @@ const ProductDetail = () => {
                   </div>
 
                   <div>
-                    <span class="font-bold text-gray-700">
+                    <span className="font-bold text-gray-700">
                       Product Description:
                     </span>
-                    <p class="text-gray-600 text-sm mt-2">
+                    <p className="text-gray-600 text-sm mt-2">
                       {product?.productDescription}
                     </p>
                   </div>
 
-                  <div class="flex -mx-2 mt-10 mb-4">
-                    <Link to={"/contact"} class="lg:w-1/2 w-full px-2">
-                      <button class="w-full text-sm  bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">
+                  <div className="flex -mx-2 mt-10 mb-4">
+                    <Link to={"/contact"} className="lg:w-1/2 w-full px-2">
+                      <button className="w-full text-sm  bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">
                         Contact Us for This Item
                       </button>
                     </Link>

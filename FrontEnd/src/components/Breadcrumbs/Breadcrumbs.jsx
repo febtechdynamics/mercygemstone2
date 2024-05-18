@@ -1,9 +1,6 @@
-import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const Breadcrumbs = ({ product }) => {
-  //   const location = useLocation();
-  //   console.log(location.pathname.split());
+const Breadcrumbs = () => {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
 
@@ -22,9 +19,9 @@ const Breadcrumbs = ({ product }) => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="mr-4 h-4 w-4"
             >
               <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>

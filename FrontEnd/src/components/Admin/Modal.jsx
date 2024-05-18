@@ -13,8 +13,8 @@ function Modal({ children, onClose }) {
   });
 
   return (
-    <div className="modal-overlay z-10">
-      <div className="modal-content mt-3 z-10 lg:w-1/3 md:w-3/4">
+    <div className="modal-overlay z-[100]">
+      <div className="modal-content mt-3 z-[100] lg:w-1/3 md:w-3/4">
         <div className="flex justify-end">
           <IconButton color="error" aria-label="delete" onClick={handleClose}>
             <CloseIcon />

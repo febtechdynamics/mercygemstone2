@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { IconButton, Pagination } from "@mui/material";
-import moment from "moment";
+import { Pagination } from "@mui/material";
+// import moment from "moment";
 import SingleCarousel from "../SingleCarosel/SingleCarosel";
 import Search from "./Search";
 import Filter from "./Filter";
@@ -11,10 +11,10 @@ import { useDebounce as useDebounceHook } from "use-debounce";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 
-function ProductList({ handleEdit, handleDelete }) {
+function ProductList() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [submitting, setSubmitting] = useState(false);
+  // const [submitting, setSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [options, setOptions] = useState("All");
@@ -88,13 +88,13 @@ function ProductList({ handleEdit, handleDelete }) {
                           productImage,
                           productPrice,
                           productDescription,
-                          productCategory,
-                          createdAt,
+                          // productCategory,
+                          // createdAt,
                         },
                         index
                       ) => {
                         return (
-                          <div className="">
+                          <div key={index}>
                             <div
                               className="card shadow-sm border-0 rounded"
                               style={{ height: "360px" }}
@@ -114,7 +114,7 @@ function ProductList({ handleEdit, handleDelete }) {
                                       {productName}
                                     </Link>
                                     <p
-                                      className="small my-2 text-muted overflow-auto"
+                                      className="small my-2 text-muted  overflow-hidden"
                                       style={{ height: "60px" }}
                                     >
                                       {productDescription}

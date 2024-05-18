@@ -8,9 +8,6 @@ const path = require("path");
 
 // create product
 exports.createProduct = catchAsync(async (req, res, next) => {
-  console.log(req.files);
-  // console.log(req.file);
-  // console.log(req.body);
   const urls = [];
   try {
     const { productName, productPrice, productDescription, productCategory } =
@@ -39,7 +36,6 @@ exports.createProduct = catchAsync(async (req, res, next) => {
         }
       }
     }
-    // console.log(urls);
 
     const product = await Product.create({
       productName,
@@ -70,7 +66,6 @@ exports.createProduct = catchAsync(async (req, res, next) => {
 });
 
 // get products
-
 exports.getAllProducts = catchAsync(async (req, res, next) => {
   const perPage = parseInt(req.query.perPage) || 6; // Number of products per page, defaulting to 10
   const page = parseInt(req.query.page) || 1; // Page number, defaulting to 1
@@ -113,7 +108,6 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
 });
 
 //get product by id
-
 exports.getProductById = catchAsync(async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -130,15 +124,16 @@ exports.getProductById = catchAsync(async (req, res, next) => {
 });
 
 //edit product
-
 exports.updateProduct = catchAsync(async (req, res, next) => {
   console.log(req.params);
   console.log(req.body);
+
   const { productName, productPrice, productDescription, productCategory } =
     req.body;
 
   try {
     let product = await Product.findById(req.params.id);
+
     if (!productName || !productDescription || !productCategory) {
       return next(new ErrorHandler("Please enter all fields", 400));
     }

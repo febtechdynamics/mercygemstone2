@@ -1,30 +1,38 @@
 import "./App.css";
 import Home from "./components/home/Home";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import Shared from "./components/sharedlayout/Shared";
 
-import Login from "./components/login/Login";
-
-import Four0Four from "./components/Four0Frour/Four0Four";
-import { useEffect } from "react";
+import { Suspense, useEffect, lazy } from "react";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AdminPanel from "./components/Admin/AdminPannel";
-import UserList from "./components/Admin/User/UserList";
-import ProductList from "./components/Admin/Product/ProductList";
-import Products from "./components/Products/Products";
-import ProductDetail from "./components/ProductDetail/ProductDetail";
-import ContactNew from "./components/contact/ContactNew";
-import AboutNew from "./components/about/AboutNew";
 import ProtectedRoutes from "./components/Admin/ProtectedRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./components/Redux/reducers/authSlice";
-import MainContent from "./components/Admin/MainContent";
+import PageLoader from "./components/PageLoader/PageLoader";
+// admin
+const AdminPanel = lazy(() => import("./components/Admin/AdminPannel"));
+const UserList = lazy(() => import("./components/Admin/User/UserList"));
+const ProductList = lazy(() =>
+  import("./components/Admin/Product/ProductList")
+);
+const MainContent = lazy(() => import("./components/Admin/MainContent"));
+
+// rest
+const Products = lazy(() => import("./components/Products/Products"));
+const ProductDetail = lazy(() =>
+  import("./components/ProductDetail/ProductDetail")
+);
+const ContactNew = lazy(() => import("./components/contact/ContactNew"));
+const AboutNew = lazy(() => import("./components/about/AboutNew"));
+const Shared = lazy(() => import("./components/sharedlayout/Shared"));
+const Login = lazy(() => import("./components/login/Login"));
+const Four0Four = lazy(() => import("./components/Four0Frour/Four0Four"));
 
 function App() {
   const { pathname } = useLocation();
-  c;
+  const { isAuth, user } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -37,39 +45,117 @@ function App() {
     window.scrollTo(0, 0);
   }, [pathname]);
   console.log(user);
+
   return (
     <>
       {/* <ScrollToTop /> */}
       <Routes>
-        <Route path="/" element={<Shared />}>
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/product/:id" element={<IndustrialDetail />} /> */}
-          <Route path="/products/:id" element={<ProductDetail />} />
-          <Route path="/about" element={<AboutNew />} />
-          {/* <Route path="/about" element={<AboutDetail />} /> */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/contact" element={<ContactNew />} />
-          {/* <Route path="/contact" element={<Contact />} /> */}
-          {/* <Route path="/gemston-list" element={<GemstoneList />} />
-          <Route path="/industrial-list" element={<IndustrialList />} /> */}
-          <Route path="/products" element={<Products />} />
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <Shared />
+            </Suspense>
+          }
+        >
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Home />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/products/:id"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <ProductDetail />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AboutNew />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/login"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Login />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <ContactNew />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/products"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Products />
+              </Suspense>
+            }
+          />
           {/* Only render Admin route if user is logged in */}
         </Route>
         <Route
           path="/admin"
           element={
-            <ProtectedRoutes>
-              <AdminPanel />
-            </ProtectedRoutes>
+            <Suspense fallback={<PageLoader />}>
+              <ProtectedRoutes>
+                <AdminPanel />
+              </ProtectedRoutes>
+            </Suspense>
           }
         >
-          <Route path="/admin" element={<MainContent />} />
-          <Route path="/admin/users" element={<UserList />} />
-          <Route path="/admin/products" element={<ProductList />} />
+          <Route
+            path="/admin"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <MainContent />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <UserList />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/products"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <ProductList />
+              </Suspense>
+            }
+          />
         </Route>
-        <Route path="*" element={<Four0Four />} />
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <Four0Four />
+            </Suspense>
+          }
+        />
       </Routes>
+
       <ToastContainer
         position="top-center"
         autoClose={5000}

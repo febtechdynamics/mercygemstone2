@@ -84,14 +84,14 @@ function AdminPanel() {
                 </NavLink>
               </section>
             </Box>
-            <Box>
+            <div className="hidden lg:block">
               <button
                 onClick={logOut}
                 className="bg-red-500 px-3 py-1 rounded-full hover:bg-red-600 duration-200 ease-in"
               >
                 Sign Out
               </button>
-            </Box>
+            </div>
           </Box>
         </Toolbar>
       </AppBar>
@@ -114,7 +114,8 @@ function AdminPanel() {
 
 function DrawerPopUp() {
   const [open, setOpen] = React.useState(false);
-
+  const dispatch = useDispatch();
+  const logOut = () => dispatch(logout());
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
@@ -144,6 +145,14 @@ function DrawerPopUp() {
         ))}
       </List>
       <Divider />
+      <div className="mt-3 flex justify-center">
+        <button
+          onClick={logOut}
+          className="bg-red-500  text-white px-3 py-1 rounded-full hover:bg-red-600 duration-200 ease-in"
+        >
+          Sign Out
+        </button>
+      </div>
     </Box>
   );
 

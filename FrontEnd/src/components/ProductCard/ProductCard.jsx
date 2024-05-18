@@ -1,12 +1,12 @@
-import React from "react";
 import SingleCarousel from "../SingleCarosel/SingleCarosel";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const ProductCard = ({ id, productImage, productName, productCategory }) => {
   return (
-    <div class="flex-shrink-0 m-6 relative overflow-hidden bg-orange-500 rounded-lg max-w-xs shadow-lg">
+    <div className="flex-shrink-0 m-6 relative overflow-hidden bg-orange-500 rounded-lg max-w-xs shadow-lg">
       <svg
-        class="absolute bottom-0 left-0 mb-8"
+        className="absolute bottom-0 left-0 mb-8"
         viewBox="0 0 375 283"
         fill="none"
         style={{
@@ -32,9 +32,9 @@ const ProductCard = ({ id, productImage, productName, productCategory }) => {
           fill="white"
         />
       </svg>
-      <div class="relative pt-10 px-10 w-full flex items-center justify-center">
+      <div className="relative pt-10 px-10 w-full flex items-center justify-center">
         <div
-          class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+          className="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
           style={{
             background: "radial-gradient(black, transparent 60%)",
             transform: "rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1)",
@@ -42,28 +42,30 @@ const ProductCard = ({ id, productImage, productName, productCategory }) => {
           }}
         ></div>
         <SingleCarousel images={productImage} />
-        {/* <img
-          class="relative w-40"
-          src="https://user-images.githubusercontent.com/2805249/64069899-8bdaa180-cc97-11e9-9b19-1a9e1a254c18.png"
-          alt=""
-        /> */}
       </div>
-      <div class="relative text-white px-6 pb-6 mt-6">
-        <span class="block opacity-75 text-left text-sm -mb-1">
+      <div className="relative text-white px-6 pb-6 mt-6">
+        <span className="block opacity-75 text-left text-sm -mb-1">
           {productCategory}
         </span>
-        <div class="flex justify-between">
-          <span class="block font-semibold text-xl">{productName}</span>
+        <div className="flex justify-between">
+          <span className="block font-semibold text-xl">{productName}</span>
         </div>
         <Link
           to={`/products/${id}`}
-          class="block hover:text-gray-700 bg-white rounded-full text-orange-500 text-xs font-bold px-3 py-2 mt-3 leading-none text-center items-center"
+          className="block hover:text-gray-700 bg-white rounded-full text-orange-500 text-xs font-bold px-3 py-2 mt-3 leading-none text-center items-center"
         >
           See More
         </Link>
       </div>
     </div>
   );
+};
+
+ProductCard.propTypes = {
+  id: PropTypes.string,
+  productImage: PropTypes.string,
+  productName: PropTypes.string,
+  productCategory: PropTypes.string,
 };
 
 export default ProductCard;

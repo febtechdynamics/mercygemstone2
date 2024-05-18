@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Modal from "../Modal"; // Import your Modal component
 import Products from "../Products"; // Import your Products component
-
 import { IconButton, Pagination } from "@mui/material";
 import DeleteBtn from "../DeleteBtn";
 import EditIcon from "@mui/icons-material/Edit";

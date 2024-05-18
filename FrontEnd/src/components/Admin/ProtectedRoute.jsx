@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function ProtectedRoutes({ children }) {
-  let { isAuth, user, isLoading } = useSelector((state) => state.auth);
+  let { isAuth, user } = useSelector((state) => state.auth);
 
   let navigate = useNavigate();
 
@@ -12,7 +12,7 @@ function ProtectedRoutes({ children }) {
   }
 
   useEffect(() => {
-    if (isEmpty(user) && !isLoading) {
+    if (isEmpty(user) && !isAuth) {
       navigate("/login", { replace: true });
     }
   }, [isAuth]);
