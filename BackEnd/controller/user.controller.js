@@ -24,7 +24,7 @@ exports.createUser = catchAsync(async (req, res, next) => {
         success: true,
         message: "user creater successfully",
         _id: newUser._id,
-        firstName: newUser.firstNameame,
+        firstName: newUser.firstName,
         email: newUser.email,
       });
     }

@@ -64,7 +64,7 @@ async function hashPassword(next) {
 }
 userSchema.pre("findOneAndUpdate", hashPassword);
 
-//compare password functiom
+//compare password function
 userSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };

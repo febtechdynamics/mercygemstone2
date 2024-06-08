@@ -18,7 +18,10 @@ const Search = ({ toggleSearchVisibility }) => {
         </div>
       </div>
       <div className="text-gray-600">
-        <SearchBarResults results={results} />
+        <SearchBarResults
+          results={results}
+          toggleSearchVisibility={toggleSearchVisibility}
+        />
       </div>
     </>
   );
