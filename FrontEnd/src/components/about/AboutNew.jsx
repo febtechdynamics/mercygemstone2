@@ -1,8 +1,18 @@
 import sideImage from "./side-img.png";
+import {Helmet} from "react-helmet";
 
 const AboutNew = () => {
   return (
     <>
+      <Helmet>
+        <title>About Mercygem</title>
+        <meta name="description" content=" Mercy Gem is a renowned supplier of exquisite gemstones and minerals,
+            specializing in sourcing from the rich and diverse mines of
+            Ethiopia. With a deep appreciation for the natural wonders found in
+            this region, we are committed to offering a curated selection of
+            high-quality gemstones that showcase the unique beauty and cultural
+            heritage of Ethiopia." />
+      </Helmet>
       <div className="bg-yellow-50  p-4">
         <div className="container mx-auto pt-12 pb-20">
           <h1 className=" text-4xl tracking-tight font-semibold text-primary-100 text-gray-700 text-center mb-8">

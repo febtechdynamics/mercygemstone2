@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Pagination } from "@mui/material";
+import {Helmet} from "react-helmet";
 // import moment from "moment";
 import SingleCarousel from "../SingleCarosel/SingleCarosel";
 import Search from "./Search";
@@ -50,6 +51,11 @@ function ProductList() {
   }, [currentPage, debouncedSearch, options]);
 
   return (
+      <>
+      <Helmet>
+        <title>Mercygem, Products</title>
+        <meta name="description" content="we are committed to offering a curated selection of high-quality gemstones that showcase the unique beauty and cultural heritage of Ethiopia." />
+      </Helmet>
     <section className="max-w-screen-xl mx-auto">
       <div className="sticky  top-0 z-10 bg-white">
         <Breadcrumbs />
@@ -173,6 +179,7 @@ function ProductList() {
         </section>
       </div>
     </section>
+      </>
   );
 }
 

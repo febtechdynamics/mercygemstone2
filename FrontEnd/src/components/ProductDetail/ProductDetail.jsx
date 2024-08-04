@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import { Link } from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -36,6 +37,10 @@ const ProductDetail = () => {
 
   return (
     <section>
+        <Helmet>
+            <title>{product?.productName}</title>
+            <meta name="description" content={`${product?.productDescription}`} />
+        </Helmet>
       <div className="max-w-screen-xl mx-auto">
         <Breadcrumbs />
       </div>

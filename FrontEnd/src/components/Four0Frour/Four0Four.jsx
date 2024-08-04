@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 const Four0Four = () => {
   return (
+      <>
+
+        <Helmet>
+          <title>Mercygem, Not Found</title>
+        </Helmet>
     <section className="flex flex-col h-screen justify-center items-center bg-gray-100">
       <div className="flex flex-col items-center">
         <h1 className="text-[120px] font-extrabold text-gray-700">404</h1>
@@ -16,6 +22,7 @@ const Four0Four = () => {
         </Link>
       </div>
     </section>
+      </>
   );
 };
 
