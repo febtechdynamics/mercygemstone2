@@ -6,6 +6,7 @@ const helmet = require("helmet");
 const user = require("./routes/user.routes");
 const product = require("./routes/product.routes");
 const cors = require("cors");
+const mongoSanitize = require("express-mongo-sanitize");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -13,20 +14,25 @@ const port = process.env.PORT || 5000;
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+// app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: "http://89.116.51.11:80", credentials: true }));
+app.use(mongoSanitize());
 
 app.use("/api/user", user);
 app.use("/api/product", product);
+app.use((err, req, res, next) => {
+    res.status(500).json({ status: false, message: "something went wrong" });
+});
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../FrontEnd/dist")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "FrontEnd", "dist", "index.html"));
-  });
+    app.use(express.static(path.join(__dirname, "../FrontEnd/dist")));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "FrontEnd", "dist", "index.html"));
+    });
 } else {
-  app.get("/", (req, res) => {
-    res.send("please set to production");
-  });
+    app.get("/", (req, res) => {
+        res.send("please set to production");
+    });
 }
 
 app.use(ErrorHandler);

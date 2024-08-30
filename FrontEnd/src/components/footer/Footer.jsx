@@ -29,48 +29,51 @@ const Footer = () => {
               </div>
               <div className="col-md-3">
                 <div className="info_contact">
-                  <Link to="/">
+                  <Link className="flex mb-2 h-5" to="/">
                     <img src={locationIcon} alt="Location" />
                     <span>Address</span>
                   </Link>
-                  <br />
-                  Addis Ababa Bole In front of Harmony Hotel SA Building 6th
-                  floor off.no.2
+                  <div className="text-sm mt-2">
+                    Addis Ababa Bole In front of Harmony Hotel SA Building 6th
+                    floor off.no.2
+                  </div>
                 </div>
               </div>
               <div className="col-md-3">
                 <div className="info_contact">
-                  <Link to="/">
+                  <Link className="flex h-5" to="/">
                     <img src={phoneIcon} alt="Phone" />
-                    <span>+251967272727</span>
+                    <span>+251 967 272 727</span>
                   </Link>
                 </div>
               </div>
               <div className="col-md-3">
                 <div className="info_contact">
-                  <Link to="/">
+                  <Link className="flex h-5 items-center" to="/">
                     <img src={mailIcon} alt="Email" />
-                    <span>mercygems109@gmail.com</span>
+                    <span>mercygems109 @gmail.com</span>
                   </Link>
                 </div>
               </div>
             </div>
-            <div className="info_form">
-              <div className="d-flex justify-content-center"></div>
-              <div className="email_box">
-                <Link to="https://wa.me/+251967272727" target="_blank">
-                  <button>
-                    <span>
-                      <img src={whatsapp} alt="WhatsApp" />
-                    </span>
-                    Message us on WhatsApp
+            <div className="flex justify-center ">
+              {/* <div className="d-flex justify-content-center"></div> */}
+              <div className="email_box border border-1 px-4 py-1 rounded-full">
+                <Link
+                  className=" hover:text-green-500 duration-200 hover:no-underline"
+                  to="https://wa.me/+251967272727"
+                  target="_blank"
+                >
+                  <button className="flex gap-3 items-center">
+                    <img src={whatsapp} alt="WhatsApp" />
+                    <span>Message us on WhatsApp</span>
                   </button>
                 </Link>
               </div>
             </div>
             <div className="info_social">
               <div className="d-flex justify-content-center">
-                <h5 className="info_heading">Follow Us</h5>
+                <h5 className="">Follow Us On</h5>
               </div>
               <div className="social_box">
                 <Link

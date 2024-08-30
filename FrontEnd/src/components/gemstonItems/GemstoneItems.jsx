@@ -5,6 +5,8 @@ import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import "./gemstonItem.css";
+import ProductCard from "../ProductCard/ProductCard";
+import SkeletonCard from "../SkeletonCard/SkeletonCard";
 
 const GemstoneItems = () => {
   const responsive = {
@@ -14,22 +16,33 @@ const GemstoneItems = () => {
     mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
   };
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(products);
 
   useEffect(() => {
     // Fetch products from API or database
+    setIsLoading(true);
     axios
       .get(
-        "http://localhost:3000/api/product/?category=GemStone&perPage=4&page=1"
+        ` ${
+          import.meta.env.VITE_REACT_APP_base_url
+        }/api/product/?category=GemStone&perPage=3&page=1`
       )
       .then((response) => {
         console.log(response.data.products);
         setProducts(response.data.products);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
       });
   }, []);
 
   return (
     <div className="gemstone_container">
-      <h1 className="gemstone_title">Gemstone</h1>
+      <h1 className="text-4xl pt-3 px-3  ">Gemstones</h1>
+      <div className="border-b-4 border-orange-500 inline-block pb-3 w-32 mb-5"></div>
       <Carousel
         infinite={true}
         autoPlay={true}
@@ -37,26 +50,21 @@ const GemstoneItems = () => {
         transitionDuration={500}
         responsive={responsive}
       >
-        {products?.map(({ _id, productName, productImage }) => (
-          <div key={_id} className="single_iteme">
-            {productImage?.map((images) => {
-              const productImage = (
-                <img
-                  className="gemstone_image"
-                  src={images?.urls}
-                  alt={productName}
-                />
-              );
-              return productImage;
-            })}
-            <h3>{productName}</h3>
-            <p>
-              <Link to={`/product/${_id}`}>
-                <button>See More</button>
-              </Link>
-            </p>
-          </div>
-        ))}
+        {isLoading && <SkeletonCard />}
+        {isLoading && <SkeletonCard />}
+        {isLoading && <SkeletonCard />}
+
+        {products?.map(
+          ({ _id, productName, productCategory, productImage }) => (
+            <ProductCard
+              key={_id}
+              id={_id}
+              productImage={productImage}
+              productName={productName}
+              productCategory={productCategory}
+            />
+          )
+        )}
       </Carousel>
     </div>
   );

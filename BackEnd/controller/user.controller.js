@@ -24,7 +24,7 @@ exports.createUser = catchAsync(async (req, res, next) => {
         success: true,
         message: "user creater successfully",
         _id: newUser._id,
-        firstName: newUser.firstNameame,
+        firstName: newUser.firstName,
         email: newUser.email,
       });
     }
@@ -108,7 +108,7 @@ exports.editUser = catchAsync(async (req, res, next) => {
   try {
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-      runValidators: true,
+      runValidators: false,
       useFindAndModify: false,
     });
     res.status(200).json({
@@ -126,7 +126,7 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
     if (user) {
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: "user deleted successfully",
         user,
@@ -136,4 +136,12 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
   }
+});
+
+exports.getMe = catchAsync(async (req, res, next) => {
+  // console.log(req.user);
+  res.status(200).json({
+    status: true,
+    me: req.user,
+  });
 });

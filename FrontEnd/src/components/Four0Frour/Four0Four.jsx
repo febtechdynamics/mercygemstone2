@@ -1,14 +1,29 @@
-import React from 'react';
-import four04 from "../../../public/images/404.png";
-import "./Four0Four.css";
+import { Link } from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 const Four0Four = () => {
   return (
-    <div className="Four0Four">
-        <h1><span>4</span><img className='F0F_img' src={four04} alt="0" /><span>4</span></h1>
-        <p className="lead">Page not found!</p>
-    </div>
+      <>
+
+        <Helmet>
+          <title>Mercygem, Not Found</title>
+        </Helmet>
+    <section className="flex flex-col h-screen justify-center items-center bg-gray-100">
+      <div className="flex flex-col items-center">
+        <h1 className="text-[120px] font-extrabold text-gray-700">404</h1>
+        <p className="text-2xl font-medium text-gray-600 mb-6">
+          Ops ! Page Not Found
+        </p>
+        <Link
+          to="/"
+          className="px-4 py-2 font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600 transition-all duration-200 ease-in-out"
+        >
+          Go Home
+        </Link>
+      </div>
+    </section>
+      </>
   );
-}
+};
 
 export default Four0Four;

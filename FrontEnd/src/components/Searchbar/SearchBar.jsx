@@ -6,7 +6,7 @@ const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState("");
 
   const fetchData = (value) => {
-    fetch(`http://localhost:3000/api/product`)
+    fetch(` ${import.meta.env.VITE_REACT_APP_base_url}/api/product`)
       .then((response) => response.json())
       .then((json) => {
         const filteredResults = json.products.filter((product) => {
@@ -32,6 +32,7 @@ const SearchBar = ({ setResults }) => {
         <input
           placeholder="Search..."
           value={input}
+          className="text-gray-600 "
           onChange={(e) => handleChange(e.target.value)}
         />
       </div>

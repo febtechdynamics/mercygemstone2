@@ -8,14 +8,16 @@ const {
   getUser,
   editUser,
   deleteUser,
+  getMe,
 } = require("../controller/user.controller");
 const router = express.Router();
 
 router.post("/", auth, createUser);
 router.post("/login", loginUser);
 router.get("/", auth, getUser);
+router.get("/me", auth, getMe);
 router.get("/:id", auth, getUserById);
-router.put("/:id", auth, editUser);
+router.patch("/:id", auth, editUser);
 router.delete("/:id", auth, deleteUser);
 
 module.exports = router;

@@ -19,11 +19,10 @@ const auth = async (req, res, next) => {
       next();
     } catch (error) {
       console.log(error);
-      console.log(token);
       return next(new ErrorHandler("Not Authorized", 401));
     }
   }
-  // console.log(req.headers);
+
   if (!token) {
     // console.log(token);
     return next(new ErrorHandler("Not Authorized ", 401));

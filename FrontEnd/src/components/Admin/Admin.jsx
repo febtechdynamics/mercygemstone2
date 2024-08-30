@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Admin.css"; // Import your custom CSS file
 import Sidebar from "./Sidebar";
 import axios from "axios";
@@ -9,8 +9,18 @@ import { useNavigate } from "react-router-dom";
 function Admin() {
   const [activeTab, setActiveTab] = useState(null);
   const [products, setProducts] = useState([]); // Assuming products are stored in state
+  const [showSideBar, setShowSideBar] = useState(true);
 
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+
+  // Redirect to login page if users token is not present
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token, navigate]);
 
   const handleTabClick = (tab) => {
     console.log(`clicked ${tab}`);
@@ -23,15 +33,13 @@ function Admin() {
 
   const handleDelete = async (productId) => {
     try {
-      const token = localStorage.getItem("token");
-
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       };
       await axios.delete(
-        `http://localhost:3000/api/product/${productId}`,
+        ` ${import.meta.env.VITE_REACT_APP_base_url}/api/product/${productId}`,
         config
       );
 
@@ -54,9 +62,14 @@ function Admin() {
 
   return (
     <div className="app">
-      <Sidebar activeTab={activeTab} handleTabClick={handleTabClick} />
+      {showSideBar && (
+        <Sidebar activeTab={activeTab} handleTabClick={handleTabClick} />
+      )}
+
       <MainContent
         activeTab={activeTab}
+        setShowSideBar={setShowSideBar}
+        showSideBar={showSideBar}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
         handleAddUser={handleAddUser}

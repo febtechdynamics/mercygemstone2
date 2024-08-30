@@ -2,7 +2,8 @@ import React from "react";
 import "./searchBar.css";
 import { Link } from "react-router-dom";
 
-const SearchBarResults = ({ results }) => {
+const SearchBarResults = ({ results, toggleSearchVisibility }) => {
+  console.log(results);
   const resultsClassName =
     results.length > 0
       ? "search_results"
@@ -10,10 +11,14 @@ const SearchBarResults = ({ results }) => {
 
   return (
     <div className={resultsClassName}>
-      {results.map((result, _id) => {
+      {results.map((result) => {
         return (
-          <Link to={`/product/${_id}`}>
-            <div key={_id}>{result.productName}</div>
+          <Link
+            className="hover:text-yellow-700"
+            to={`/products/${result._id}`}
+            onClick={toggleSearchVisibility}
+          >
+            <div key={result._id}>{result.productName}</div>
           </Link>
         );
       })}
