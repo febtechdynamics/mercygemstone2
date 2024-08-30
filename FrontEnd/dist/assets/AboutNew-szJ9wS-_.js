@@ -1,4 +1,4 @@
-import{j as e,H as t}from"./index-RkhYn77m.js";const s="/assets/side-img-jIxcS1U7.png",r=()=>e.jsxs(e.Fragment,{children:[e.jsxs(t,{children:[e.jsx("title",{children:"About Mercygem"}),e.jsx("meta",{name:"description",content:` Mercy Gem is a renowned supplier of exquisite gemstones and minerals,\r
+import{j as e,H as t}from"./index-lxdwaq-t.js";const s="/assets/side-img-jIxcS1U7.png",r=()=>e.jsxs(e.Fragment,{children:[e.jsxs(t,{children:[e.jsx("title",{children:"About Mercygem"}),e.jsx("meta",{name:"description",content:` Mercy Gem is a renowned supplier of exquisite gemstones and minerals,\r
             specializing in sourcing from the rich and diverse mines of\r
             Ethiopia. With a deep appreciation for the natural wonders found in\r
             this region, we are committed to offering a curated selection of\r
